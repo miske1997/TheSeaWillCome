@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmneelatg3e5k"]
+
+[sub_resource type="GDScript" id="GDScript_b1dhq"]
+resource_name = "PauseMenu"
+script/source = "extends Control
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed(\"ui_cancel\"):
+		return
+	if get_tree().root.has_node(\"MainMenu\"):
+		return
+	visible = not visible
+	
+	#pause the game
+	if visible:
+		get_tree().root.process_mode = Node.PROCESS_MODE_DISABLED
+	else:
+		get_tree().root.process_mode = Node.PROCESS_MODE_ALWAYS
+
+func _on_resume_pressed() -> void:
+	hide()
+	get_tree().root.process_mode = Node.PROCESS_MODE_ALWAYS
+
+func _on_back_to_main_pressed() -> void:
+	hide()
+	get_tree().root.process_mode = Node.PROCESS_MODE_ALWAYS
+	LevelLoader.back_to_main_menu()
+"
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_b1dhq")
+
+[node name="Main" type="VBoxContainer" parent="."]
+top_level = true
+z_index = 4096
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -182.5
+offset_top = -119.5
+offset_right = 182.5
+offset_bottom = 119.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="Main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Resume"
+
+[node name="Options" type="Button" parent="Main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Options"
+
+[node name="BackToMain" type="Button" parent="Main"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Main Menu
+"
+
+[connection signal="pressed" from="Main/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Main/BackToMain" to="." method="_on_back_to_main_pressed"]

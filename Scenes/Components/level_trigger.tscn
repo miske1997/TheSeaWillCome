@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyavtpunsnddc"]
+
+[ext_resource type="Script" uid="uid://bd5lqfw8qanfm" path="res://Scripts/Components/LevelTrigger.gd" id="1_sgmg3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxm35"]
+
+[node name="LevelTrigger" type="Area2D"]
+collision_layer = 8
+monitorable = false
+script = ExtResource("1_sgmg3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gxm35")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,4 @@
+res://Scenes/global_scene.tscn
+res://Scenes/UI/main_menu.gdshader
+res://Scripts/Globals/Controller.gd
+res://ToDo.gd

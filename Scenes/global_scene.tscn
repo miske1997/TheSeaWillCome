@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckmvr6oydyix6"]
+
+[ext_resource type="PackedScene" uid="uid://bmneelatg3e5k" path="res://Scenes/UI/pause_menu.tscn" id="1_1riqc"]
+
+[node name="GlobalScene" type="Node"]
+
+[node name="Temp" type="Node2D" parent="." groups=["Temp"]]
+
+[node name="Audio" type="Node2D" parent="Temp"]
+
+[node name="GlobalAudio" type="Node2D" parent="Temp"]
+
+[node name="Effects" type="Node2D" parent="Temp"]
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_1riqc")]
+visible = false

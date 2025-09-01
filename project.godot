@@ -1,0 +1,50 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Template"
+run/main_scene="uid://cjjxjxlwhw0tj"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Events="*res://Scripts/Globals/Events.gd"
+Utils="*res://Scripts/Globals/Utils.gd"
+Loader="*res://Scripts/Globals/Loader.gd"
+Builder="*res://Scripts/Globals/Builder.gd"
+EffectSystem="*res://Scripts/Globals/EffectSystem.gd"
+SoundSystem="*res://Scripts/Globals/SoundSystem.gd"
+GameData="*res://Scripts/Globals/GameData.gd"
+Player="*res://Scripts/Globals/Player.gd"
+LevelLoader="*res://Scripts/Globals/LevelLoader.gd"
+Saver="*res://Scripts/Globals/Saver.gd"
+Console="*res://addons/console/console.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/console/plugin.cfg", "res://addons/previous-tab/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
+
+[global_group]
+
+Temp=""
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Floor"
+2d_physics/layer_4="Triggers"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
