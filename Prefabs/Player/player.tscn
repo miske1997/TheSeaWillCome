@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://eyb8bumt5at6"]
+
+[ext_resource type="Script" uid="uid://csrtqsdjrnp64" path="res://Scripts/Modules/player.gd" id="1_6dc14"]
+[ext_resource type="Texture2D" uid="uid://da1sic4m1qffs" path="res://Assets/Sprites/Characters/KingSide.png" id="2_hnwp3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sysjd"]
+atlas = ExtResource("2_hnwp3")
+region = Rect2(0, 0, 5, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_21ygf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sysjd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_you5p"]
+size = Vector2(6, 8)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 4
+script = ExtResource("1_6dc14")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_21ygf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_you5p")

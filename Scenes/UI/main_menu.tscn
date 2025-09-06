@@ -42,8 +42,8 @@ script = SubResource("GDScript_36iwh")
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_i2xx2")
 layout_mode = 0
-offset_right = 1153.0
-offset_bottom = 647.0
+offset_right = 640.0
+offset_bottom = 359.0
 
 [node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctl3jouoc5mim"]
+
+[ext_resource type="Texture2D" uid="uid://t4o81otnwod3" path="res://Assets/Sprites/Blocks/TreeCuttable.png" id="1_1xxp5"]
+
+[node name="Tree" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1xxp5")

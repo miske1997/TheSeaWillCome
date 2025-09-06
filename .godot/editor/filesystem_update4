@@ -1,4 +1,8 @@
-res://Scenes/global_scene.tscn
+res://Prefabs/Player/player.tscn
 res://Scenes/UI/main_menu.gdshader
-res://Scripts/Globals/Controller.gd
-res://ToDo.gd
+res://Scripts/Modules/player.gd
+res://Scenes/global_scene.tscn
+res://Scenes/UI/main_menu.tscn
+res://Scenes/UI/pause_menu.tscn
+res://Scenes/Levels/Planes.tscn
+res://Prefabs/Env/tree.tscn

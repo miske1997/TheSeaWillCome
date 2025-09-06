@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Template"
+config/name="TheSeaWillCome"
 run/main_scene="uid://cjjxjxlwhw0tj"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -24,10 +24,18 @@ Builder="*res://Scripts/Globals/Builder.gd"
 EffectSystem="*res://Scripts/Globals/EffectSystem.gd"
 SoundSystem="*res://Scripts/Globals/SoundSystem.gd"
 GameData="*res://Scripts/Globals/GameData.gd"
-Player="*res://Scripts/Globals/Player.gd"
+Players="*res://Scripts/Globals/Players.gd"
 LevelLoader="*res://Scripts/Globals/LevelLoader.gd"
 Saver="*res://Scripts/Globals/Saver.gd"
 Console="*res://addons/console/console.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="canvas_items"
+window/stretch/scale=3.0
+window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
@@ -46,5 +54,6 @@ Temp=""
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
