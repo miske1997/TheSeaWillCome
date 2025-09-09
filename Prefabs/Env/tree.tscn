@@ -1,8 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctl3jouoc5mim"]
+[gd_scene load_steps=4 format=3 uid="uid://ctl3jouoc5mim"]
 
 [ext_resource type="Texture2D" uid="uid://t4o81otnwod3" path="res://Assets/Sprites/Blocks/TreeCuttable.png" id="1_1xxp5"]
 
+[sub_resource type="GDScript" id="GDScript_1xxp5"]
+resource_name = "Tree"
+script/source = "extends Node2D
+
+@export var type: String = \"Wood\"
+@export var amount: int = 1
+@export var mineTime: float = 1.0
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xxp5"]
+size = Vector2(10, 11)
+
 [node name="Tree" type="Node2D"]
+position = Vector2(0, -14)
+script = SubResource("GDScript_1xxp5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_1xxp5")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_1xxp5")

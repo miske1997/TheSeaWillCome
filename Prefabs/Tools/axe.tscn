@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://btt8faf07akqy"]
+
+[ext_resource type="PackedScene" uid="uid://13aef0hucu22" path="res://Prefabs/Tools/tool.tscn" id="1_8i5o1"]
+[ext_resource type="Script" uid="uid://iexohhgrrnlp" path="res://Scripts/Modules/Tools/Axe.gd" id="2_cgfjg"]
+
+[node name="Axe" instance=ExtResource("1_8i5o1")]
+script = ExtResource("2_cgfjg")
+
+[node name="Line2D" type="Line2D" parent="." index="2"]
+points = PackedVector2Array(0, 0, 4, -5, 7, -4, 4, -2)
+width = 2.0
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="3"]
+position = Vector2(4, -5)
+collision_mask = 16
+collide_with_areas = true

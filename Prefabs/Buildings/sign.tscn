@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://x4la8f4gtf8x"]
+
+[ext_resource type="Texture2D" uid="uid://vvhall5ic0bt" path="res://Assets/Sprites/Buildings/Sign.png" id="1_l2syc"]
+[ext_resource type="PackedScene" uid="uid://daxwc4f85i8q4" path="res://Scenes/Components/interactible.tscn" id="2_5jt3q"]
+
+[node name="Sign" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(0.0589888, 0.0589888)
+texture = ExtResource("1_l2syc")
+
+[node name="Interact" parent="." instance=ExtResource("2_5jt3q")]
+interactText = "Deposit"

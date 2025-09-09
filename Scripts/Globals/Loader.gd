@@ -3,6 +3,10 @@ extends Node
 func _ready() -> void:
 	load_global_scene()
 	load_adresses()
+	init_player_data()
+	
+func init_player_data() -> void:
+	Players._resourceData = preload("res://Data/resources.tres")
 	
 func load_adresses() -> void:
 	LevelLoader.levelAdresses = load_addresses("res://Scenes/Levels/")

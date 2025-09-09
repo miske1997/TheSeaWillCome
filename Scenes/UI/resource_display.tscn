@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://3s38tfve5no"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 32.0
+offset_bottom = 12.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Wood"
+horizontal_alignment = 2
+
+[node name="Amount" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 2

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://33yrogdttc71"]
+
+[ext_resource type="PackedScene" uid="uid://3s38tfve5no" path="res://Scenes/UI/resource_display.tscn" id="1_m8tfr"]
+
+[sub_resource type="GDScript" id="GDScript_o5qop"]
+resource_name = "Resources"
+script/source = "extends Control
+
+@export var resourceTemplate: PackedScene
+@onready var container: VBoxContainer = $VBoxContainer
+
+func _ready() -> void:
+	Players._resourceData.resourceChanged.connect(on_resource_changed)
+	
+	for key in Players.resources:
+		var label = resourceTemplate.instantiate()
+		label.name = Players.resources[key].name
+		label.get_child(0).text = Players.resources[key].name
+		container.add_child(label)
+		
+		
+func on_resource_changed(resourceName: String) -> void:
+	if not container.has_node(resourceName):
+		return
+	var lable = container.get_node(resourceName)
+	lable.get_node(\"Amount\").text = str(Players.resources[resourceName].amount)
+"
+
+[node name="Resources" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_o5qop")
+resourceTemplate = ExtResource("1_m8tfr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

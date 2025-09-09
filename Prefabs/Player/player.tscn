@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://eyb8bumt5at6"]
+[gd_scene load_steps=7 format=3 uid="uid://eyb8bumt5at6"]
 
 [ext_resource type="Script" uid="uid://csrtqsdjrnp64" path="res://Scripts/Modules/player.gd" id="1_6dc14"]
 [ext_resource type="Texture2D" uid="uid://da1sic4m1qffs" path="res://Assets/Sprites/Characters/KingSide.png" id="2_hnwp3"]
+[ext_resource type="PackedScene" uid="uid://nj5421ptdtbl" path="res://Prefabs/Tools/pick.tscn" id="3_sysjd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sysjd"]
 atlas = ExtResource("2_hnwp3")
@@ -30,3 +31,5 @@ sprite_frames = SubResource("SpriteFrames_21ygf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_you5p")
+
+[node name="Pick" parent="." instance=ExtResource("3_sysjd")]
