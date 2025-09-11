@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://eyb8bumt5at6"]
+[gd_scene load_steps=8 format=3 uid="uid://eyb8bumt5at6"]
 
 [ext_resource type="Script" uid="uid://csrtqsdjrnp64" path="res://Scripts/Modules/player.gd" id="1_6dc14"]
 [ext_resource type="Texture2D" uid="uid://da1sic4m1qffs" path="res://Assets/Sprites/Characters/KingSide.png" id="2_hnwp3"]
@@ -22,6 +22,61 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_you5p"]
 size = Vector2(6, 8)
 
+[sub_resource type="GDScript" id="GDScript_sysjd"]
+resource_name = "InteractManager"
+script/source = "extends Node2D
+
+
+@onready var ui := $InteractUI
+@onready var text := $InteractUI/Control/PanelContainer/HBoxContainer/InteractText
+@onready var inputKey := $InteractUI/Control/PanelContainer/HBoxContainer/InteractKey
+
+var prevInteractivle = null
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	var interactible: Interactible = get_closest_interactible(get_interactibles())
+	if interactible == prevInteractivle:
+		return
+	if not interactible:
+		#ui.hide()
+		prevInteractivle.get_child(0).hide()
+		prevInteractivle.selected = false
+		prevInteractivle = null
+		return
+	interactible.selected = true
+	interactible.get_child(0).show()
+	prevInteractivle = interactible
+	#ui.show()
+	#text.text = interactible.interactText
+	#if Input.is_action_just_pressed(\"Interact\"):
+		#interactible.interacted.emit()
+	
+func get_closest_interactible(interactibles: Array[Interactible]):
+	var minDist := 100000.0
+	var closest: Interactible = null
+	for interactible in interactibles:
+		if (global_position - interactible.global_position).length() < minDist:
+			minDist = (global_position - interactible.global_position).length()
+			closest = interactible
+	return closest
+	
+func get_interactibles():
+	var interactibles: Array[Interactible] = []
+	for interactible: Interactible in get_tree().get_nodes_in_group(\"Interactible\"):
+		interactible.selected = false
+		if not interactible.active or (global_position - interactible.global_position).length() > interactible.interactDistance:
+			interactible.inRange = false
+			continue
+		interactible.inRange = true
+		interactibles.push_back(interactible)
+	return interactibles
+"
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 4
 script = ExtResource("1_6dc14")
@@ -33,3 +88,6 @@ sprite_frames = SubResource("SpriteFrames_21ygf")
 shape = SubResource("RectangleShape2D_you5p")
 
 [node name="Pick" parent="." instance=ExtResource("3_sysjd")]
+
+[node name="InteractManager" type="Node2D" parent="."]
+script = SubResource("GDScript_sysjd")
