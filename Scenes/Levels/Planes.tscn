@@ -52,5 +52,5 @@ metadata/_edit_use_anchors_ = true
 [node name="Tree" parent="Trees" instance=ExtResource("4_r2dbj")]
 position = Vector2(88, 18)
 
-[node name="Node2D" parent="." instance=ExtResource("5_1wtq7")]
+[node name="Sign" parent="." instance=ExtResource("5_1wtq7")]
 position = Vector2(137, 32)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cw8vjiogyjfxx"]
 
-[ext_resource type="Texture2D" uid="uid://ck13dywk8nj5r" path="res://Assets/Sprites/Buildings/House2.png" id="1_civwn"]
+[ext_resource type="PackedScene" uid="uid://dvhjs6euc5s12" path="res://Scenes/UI/resource_requierment.tscn" id="1_civwn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_civwn"]
 bg_color = Color(0.140447, 0.140447, 0.140447, 1)
@@ -15,56 +15,40 @@ expand_margin_bottom = 2.0
 
 [sub_resource type="GDScript" id="GDScript_civwn"]
 resource_name = "BuildCostDisplay"
-script/source = "extends Control
+script/source = "extends Panel
 
+@export var resourceRequierment: PackedScene
+@onready var resource_display: HBoxContainer = $VBoxContainer/ResourceDisplay
 
 func _on_tree_entered() -> void:
 	position -= Vector2(size.x / 2.0, size.y)
+
+func draw_req(buildMaterials: Resources):
+	for key: String in buildMaterials.resources:
+		var resourceData: ResourceData = buildMaterials.resources[key]
+		var resourceRequiermentUI = resourceRequierment.instantiate()
+		resourceRequiermentUI.get_child(0).texture = load(\"res://Assets/Sprites/Blocks/Grass.png\") # + resourceData.name
+		resourceRequiermentUI.get_child(1).text = str(resourceData.amount)
+		resource_display.add_child(resourceRequiermentUI)
+		
 "
 
 [node name="BuildCostDisplay" type="Panel"]
 offset_right = 52.0
-offset_bottom = 22.0
+offset_bottom = 13.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_civwn")
 script = SubResource("GDScript_civwn")
+resourceRequierment = ExtResource("1_civwn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 offset_right = 52.0
-offset_bottom = 22.0
+offset_bottom = 13.0
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ResourceDisplay" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 alignment = 1
-
-[node name="ResourceRequierment" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ResourceRequierment"]
-layout_mode = 2
-texture = ExtResource("1_civwn")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ResourceRequierment"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 6
-text = "0/5"
-
-[node name="ResourceRequierment2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ResourceRequierment2"]
-layout_mode = 2
-texture = ExtResource("1_civwn")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ResourceRequierment2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 6
-text = "0/5"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

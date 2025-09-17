@@ -7,3 +7,7 @@ func build_prefab(prefabName: String) -> Node2D:
 		return null
 	var prefab = load(prefabAdresses[prefabName]).instantiate()
 	return prefab
+
+func makeBuilding(buildingName: String, materials: Resources) -> Node2D:
+	Utils.payResources(materials)
+	return build_prefab(buildingName)

@@ -16,6 +16,8 @@ points = PackedVector2Array(0, 0, 4, -5, 1, -6, 6, -2)
 width = 2.0
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="3"]
+top_level = true
 position = Vector2(4, -5)
+target_position = Vector2(0, 15)
 collision_mask = 4
 collide_with_areas = true

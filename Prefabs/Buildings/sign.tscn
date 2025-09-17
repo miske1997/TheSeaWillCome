@@ -1,10 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://x4la8f4gtf8x"]
+[gd_scene load_steps=9 format=3 uid="uid://x4la8f4gtf8x"]
 
 [ext_resource type="Texture2D" uid="uid://vvhall5ic0bt" path="res://Assets/Sprites/Buildings/Sign.png" id="1_l2syc"]
+[ext_resource type="Script" uid="uid://cqjd746l483e" path="res://Scripts/Resources/ResourceData.gd" id="1_xtyg3"]
+[ext_resource type="Script" uid="uid://bfcptypwxio55" path="res://Scripts/Resources/Resources.gd" id="2_4wwgw"]
 [ext_resource type="PackedScene" uid="uid://daxwc4f85i8q4" path="res://Scenes/Components/interactible.tscn" id="2_5jt3q"]
 [ext_resource type="PackedScene" uid="uid://cw8vjiogyjfxx" path="res://Scenes/UI/build_cost_display.tscn" id="3_k83na"]
 
+[sub_resource type="GDScript" id="GDScript_k83na"]
+resource_name = "Ruin"
+script/source = "extends Node2D
+
+@export var buildMaterials: Resources
+@export var buildingName: String
+
+func _ready() -> void:
+	$Interact/BuildCostDisplay.draw_req(buildMaterials)
+
+func _on_interact_interacted() -> void:
+	if not Utils.castleHasResources(buildMaterials):
+		return
+	var building := Builder.makeBuilding(buildingName, buildMaterials)
+	building.position = position
+	get_parent().add_child(building)
+	queue_free()
+"
+
+[sub_resource type="Resource" id="Resource_qvjyl"]
+script = ExtResource("1_xtyg3")
+name = "Wood"
+amount = 1
+metadata/_custom_type_script = "uid://cqjd746l483e"
+
+[sub_resource type="Resource" id="Resource_wku40"]
+script = ExtResource("2_4wwgw")
+resources = Dictionary[String, ExtResource("1_xtyg3")]({
+"Wood": SubResource("Resource_qvjyl")
+})
+metadata/_custom_type_script = "uid://bfcptypwxio55"
+
 [node name="Sign" type="Node2D"]
+script = SubResource("GDScript_k83na")
+buildMaterials = SubResource("Resource_wku40")
+buildingName = "House"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -7)
@@ -12,11 +49,11 @@ scale = Vector2(0.0589888, 0.0589888)
 texture = ExtResource("1_l2syc")
 
 [node name="Interact" parent="." instance=ExtResource("2_5jt3q")]
-interactText = "Deposit"
 
 [node name="BuildCostDisplay" parent="Interact" instance=ExtResource("3_k83na")]
 visible = false
 offset_top = -30.0
 offset_bottom = -8.0
 
+[connection signal="interacted" from="Interact" to="." method="_on_interact_interacted"]
 [connection signal="item_rect_changed" from="Interact/BuildCostDisplay" to="Interact" method="_on_build_cost_display_item_rect_changed"]

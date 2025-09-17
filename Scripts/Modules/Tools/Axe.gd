@@ -5,7 +5,9 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	look_at_target()
-	$RayCast2D.target_position = get_global_mouse_position()
+	$RayCast2D.position = global_position
+	$RayCast2D.target_position = get_local_mouse_position()
+	$RayCast2D.rotation = rotation
 	if Input.is_action_just_pressed("Click"):
 		activate_tool()
 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvhjs6euc5s12"]
+
+[ext_resource type="Texture2D" uid="uid://ck13dywk8nj5r" path="res://Assets/Sprites/Buildings/House2.png" id="1_oemv8"]
+
+[node name="ResourceRequierment" type="HBoxContainer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_oemv8")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "0/5"
