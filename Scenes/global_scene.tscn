@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckmvr6oydyix6"]
+[gd_scene load_steps=3 format=3 uid="uid://ckmvr6oydyix6"]
 
 [ext_resource type="PackedScene" uid="uid://bmneelatg3e5k" path="res://Scenes/UI/pause_menu.tscn" id="1_1riqc"]
+[ext_resource type="Script" uid="uid://ss441ck4coq8" path="res://Scripts/Systems/DayNightCycle.gd" id="2_rql2t"]
 
 [node name="GlobalScene" type="Node"]
 
@@ -14,3 +15,12 @@
 
 [node name="PauseMenu" parent="." instance=ExtResource("1_1riqc")]
 visible = false
+
+[node name="DayNightCycle" type="Node" parent="."]
+script = ExtResource("2_rql2t")
+tick = 1.0
+
+[node name="Timer" type="Timer" parent="DayNightCycle"]
+autostart = true
+
+[connection signal="timeout" from="DayNightCycle/Timer" to="DayNightCycle" method="increment_time"]

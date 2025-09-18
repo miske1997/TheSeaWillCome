@@ -17,6 +17,7 @@ size = Vector2(10, 11)
 [node name="Tree" type="Node2D"]
 position = Vector2(0, -14)
 script = SubResource("GDScript_1xxp5")
+amount = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_1xxp5")

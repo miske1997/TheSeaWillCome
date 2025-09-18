@@ -1,16 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://btt8faf07akqy"]
+[gd_scene load_steps=6 format=3 uid="uid://btt8faf07akqy"]
 
 [ext_resource type="PackedScene" uid="uid://13aef0hucu22" path="res://Prefabs/Tools/tool.tscn" id="1_8i5o1"]
 [ext_resource type="Script" uid="uid://iexohhgrrnlp" path="res://Scripts/Modules/Tools/Axe.gd" id="2_cgfjg"]
+[ext_resource type="Script" uid="uid://df4gqskgn8o76" path="res://Scripts/Resources/Tool/ToolConfig.gd" id="3_23cue"]
+
+[sub_resource type="Resource" id="Resource_vkurk"]
+script = ExtResource("3_23cue")
+mineSpeed = 1.0
+mineAmount = 1.0
+metadata/_custom_type_script = "uid://df4gqskgn8o76"
+
+[sub_resource type="Curve2D" id="Curve2D_23cue"]
+bake_interval = 2.0
+_data = {
+"points": PackedVector2Array(-5.47954, 1.98854, 5.47954, -1.98854, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 2, 1)
+}
+point_count = 3
 
 [node name="Axe" instance=ExtResource("1_8i5o1")]
 script = ExtResource("2_cgfjg")
+toolConfig = SubResource("Resource_vkurk")
 
-[node name="Line2D" type="Line2D" parent="." index="2"]
+[node name="Path2D" type="Path2D" parent="." index="2"]
+curve = SubResource("Curve2D_23cue")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
+rotation = -0.348123
+loop = false
+
+[node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D" index="0"]
 points = PackedVector2Array(0, 0, 4, -5, 7, -4, 4, -2)
 width = 2.0
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="3"]
+top_level = true
 position = Vector2(4, -5)
 collision_mask = 16
 collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="." index="4"]
+
+[connection signal="timeout" from="Timer" to="." method="mine"]
