@@ -1,5 +1,8 @@
+res://Assets/Sprites/Blocks
 res://Scenes/UI
 res://Prefabs/Buildings
+res://Scenes/Levels
+res://Scenes
 res://Assets/Tilemaps
 res://Prefabs/Tools
 res://Data
@@ -8,7 +11,6 @@ res://Prefabs/Env
 res://Assets/Sprites
 res://Prefabs/Player
 res://Scripts/Modules
-res://Scenes/Levels
 res://Scenes/Components
 res://Scripts/Components
 res://Scripts/Globals

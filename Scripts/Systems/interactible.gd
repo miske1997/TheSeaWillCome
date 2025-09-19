@@ -11,5 +11,5 @@ signal interacted
 func _process(delta: float) -> void:
 	if not active:
 		return
-	if Input.is_action_just_pressed("Interact"):
+	if Input.is_action_just_pressed("Interact") and inRange:
 		interacted.emit()

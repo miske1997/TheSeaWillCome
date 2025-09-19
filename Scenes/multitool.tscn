@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://d04un2ocoolw7"]
+
+[ext_resource type="PackedScene" uid="uid://nj5421ptdtbl" path="res://Prefabs/Tools/pick.tscn" id="1_p0lur"]
+[ext_resource type="PackedScene" uid="uid://btt8faf07akqy" path="res://Prefabs/Tools/axe.tscn" id="2_8tdg8"]
+
+[sub_resource type="GDScript" id="GDScript_p0lur"]
+resource_name = "Multitool"
+script/source = "extends Node2D
+
+var selectedTool: Node2D
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
+
+func _process(delta: float) -> void:
+	$RayCast2D.position = global_position
+	$RayCast2D.target_position = get_local_mouse_position().normalized() * 20
+	$RayCast2D.rotation = rotation
+	
+	var collider = ray_cast_2d.get_collider()
+	if not collider:
+		hide_tool()
+		return
+	if collider is TileMapLayer:
+		show_tool($Pick)
+	elif collider.collision_layer == 16:
+		show_tool($Axe)
+		
+
+func show_tool(tool):
+	if tool != selectedTool:
+		hide_tool()
+	tool.visible = true
+	tool.enabled = true
+	selectedTool = tool
+
+func hide_tool():
+	if not selectedTool:
+		return
+	selectedTool.visible = false
+	selectedTool.enabled = false
+"
+
+[node name="Multitool" type="Node2D"]
+script = SubResource("GDScript_p0lur")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+top_level = true
+collision_mask = 20
+collide_with_areas = true
+
+[node name="Pick" parent="." instance=ExtResource("1_p0lur")]
+visible = false
+
+[node name="Axe" parent="." instance=ExtResource("2_8tdg8")]
+visible = false

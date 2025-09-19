@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://btg0mnufcdcba"]
+
+[ext_resource type="Texture2D" uid="uid://p2lcup8s0qhg" path="res://Assets/Sprites/Buildings/LiftTop2.png" id="1_tmug2"]
+[ext_resource type="PackedScene" uid="uid://daxwc4f85i8q4" path="res://Scenes/Components/interactible.tscn" id="2_8y8yy"]
+[ext_resource type="PackedScene" uid="uid://baplxswkbfgfv" path="res://Scenes/UI/lift_ui.tscn" id="3_8y8yy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cphue"]
+size = Vector2(16, 4)
+
+[node name="LiftTop2" type="Sprite2D"]
+texture = ExtResource("1_tmug2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_cphue")
+
+[node name="Interact" parent="." instance=ExtResource("2_8y8yy")]
+
+[node name="LiftUI" parent="Interact" instance=ExtResource("3_8y8yy")]
+visible = false
+offset_top = -15.0
+offset_bottom = 2.0

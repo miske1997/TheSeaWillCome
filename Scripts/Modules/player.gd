@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 @export var SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -120.0
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

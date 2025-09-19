@@ -4,6 +4,7 @@ class_name Tool extends Node2D
 var lookAtTaret: Vector2
 var inUse = false
 var onCooldown = false
+var enabled = false
 
 signal activate
 signal secondary

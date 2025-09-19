@@ -8,6 +8,8 @@ func _ready() -> void:
 	timer.wait_time = toolConfig.mineSpeed
 
 func _process(delta: float) -> void:
+	if not enabled:
+		return
 	look_at_target()
 	$RayCast2D.position = global_position
 	$RayCast2D.target_position = get_local_mouse_position().normalized() * 10
