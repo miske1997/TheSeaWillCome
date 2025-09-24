@@ -88,3 +88,7 @@ shape = SubResource("RectangleShape2D_you5p")
 script = SubResource("GDScript_sysjd")
 
 [node name="Multitool" parent="." instance=ExtResource("3_sysjd")]
+
+[node name="WallDetect" type="RayCast2D" parent="."]
+target_position = Vector2(3.5, 0)
+collision_mask = 4

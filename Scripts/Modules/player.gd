@@ -2,23 +2,34 @@ class_name Player extends CharacterBody2D
 
 @export var SPEED = 300.0
 const JUMP_VELOCITY = -220.0
+var wallJumpDuration := 0.3
+var wallJumpTimeout := 0.0
+@onready var wall_detect: RayCast2D = $WallDetect
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	if  Input.is_action_just_pressed("ui_accept") and wall_detect.get_collider() and not is_on_floor():
+		velocity.y = JUMP_VELOCITY * 1.2
+		velocity.x = sign(wall_detect.target_position.x) * -SPEED
+		wall_detect.target_position.x *= -1 
+		wallJumpTimeout = wallJumpDuration
+		
+	if wallJumpTimeout > 0:
+		wallJumpTimeout -= delta
+		move_and_slide()
+		return
+		
 	var direction := Input.get_axis("Left", "Right")
+	wall_detect.target_position.x = direction * 3.5
 	$AnimatedSprite2D.flip_h = direction < 0
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
 
 	move_and_slide()

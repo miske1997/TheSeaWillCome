@@ -5,13 +5,24 @@ resource_name = "ProductionBuilding"
 script/source = "extends Node2D
 
 @export var production: Resources
+@export var buildMaterials: Resources
+@export var buildingName: String
 
 func _ready() -> void:
+	$Interact/BuildCostDisplay.draw_req(buildMaterials)
 	Events.nightFall.connect(on_night_fall)
 	
 func on_night_fall() -> void:
 	for resourceName in production.resources:
 		GameData._resourceData.set_resource_amount(resourceName, GameData.castleResources[resourceName].amount + production.resources[resourceName].amount)
+
+func _on_interact_interacted() -> void:
+	if not Utils.castleHasResources(buildMaterials):
+		return
+	var building := Builder.makeBuilding(buildingName, buildMaterials)
+	building.position = position
+	get_parent().add_child(building)
+	queue_free()
 "
 
 [node name="ProductionBuilding" type="Node2D"]
