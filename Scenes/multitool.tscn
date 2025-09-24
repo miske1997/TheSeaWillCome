@@ -49,6 +49,7 @@ collide_with_areas = true
 
 [node name="Pick" parent="." instance=ExtResource("1_p0lur")]
 visible = false
+position = Vector2(4, -2)
 
 [node name="Axe" parent="." instance=ExtResource("2_8tdg8")]
 visible = false

@@ -27,10 +27,6 @@ resource_name = "InteractManager"
 script/source = "extends Node2D
 
 
-@onready var ui := $InteractUI
-@onready var text := $InteractUI/Control/PanelContainer/HBoxContainer/InteractText
-@onready var inputKey := $InteractUI/Control/PanelContainer/HBoxContainer/InteractKey
-
 var prevInteractivle = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -78,6 +74,7 @@ func get_interactibles():
 "
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 4096
 collision_mask = 4
 script = ExtResource("1_6dc14")
 

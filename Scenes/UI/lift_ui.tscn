@@ -5,13 +5,17 @@ resource_name = "LiftUI"
 script/source = "extends Control
 
 
+
 func _on_tree_entered() -> void:
 	position -= Vector2(size.x / 2.0, size.y)
 
 
 func _on_level_1_pressed() -> void:
 	LevelLoader.pop_level()
-	LevelLoader.push_level(\"cave_level_1\")
+	var levelName = get_parent().get_parent().nextLevel
+	LevelLoader.push_level(levelName)
+	if levelName == \"surfice\":
+		LevelLoader.levelStack.back().back_from_mine()
 "
 
 [node name="LiftUI" type="Panel"]

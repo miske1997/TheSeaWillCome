@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://pvg1lvftbxnj"]
+[gd_scene load_steps=9 format=4 uid="uid://pvg1lvftbxnj"]
 
-[ext_resource type="Texture2D" uid="uid://dlu071a6gh04e" path="res://Assets/Sprites/BG/Pozadina.png" id="1_472bh"]
-[ext_resource type="TileSet" uid="uid://qqtgrsrtixc7" path="res://Assets/Tilemaps/Planes.tres" id="1_r2dbj"]
-[ext_resource type="PackedScene" uid="uid://btg0mnufcdcba" path="res://Prefabs/Buildings/lift.tscn" id="2_cphue"]
-[ext_resource type="PackedScene" uid="uid://eyb8bumt5at6" path="res://Prefabs/Player/player.tscn" id="3_1wtq7"]
-[ext_resource type="PackedScene" uid="uid://33yrogdttc71" path="res://Scenes/UI/resources.tscn" id="4_1wtq7"]
-[ext_resource type="PackedScene" uid="uid://ctl3jouoc5mim" path="res://Prefabs/Env/tree.tscn" id="4_r2dbj"]
-[ext_resource type="PackedScene" uid="uid://x4la8f4gtf8x" path="res://Prefabs/Buildings/sign.tscn" id="5_1wtq7"]
+[ext_resource type="Texture2D" uid="uid://dlu071a6gh04e" path="res://Assets/Sprites/BG/Pozadina.png" id="1_yvs8g"]
+[ext_resource type="TileSet" uid="uid://qqtgrsrtixc7" path="res://Assets/Tilemaps/Planes.tres" id="2_wo82p"]
+[ext_resource type="PackedScene" uid="uid://btg0mnufcdcba" path="res://Prefabs/Buildings/lift.tscn" id="3_lxwo3"]
+[ext_resource type="PackedScene" uid="uid://eyb8bumt5at6" path="res://Prefabs/Player/player.tscn" id="4_qyjal"]
+[ext_resource type="PackedScene" uid="uid://bkqt85ww3j77d" path="res://Scenes/camera.tscn" id="5_jo3ps"]
+[ext_resource type="PackedScene" uid="uid://ctl3jouoc5mim" path="res://Prefabs/Env/tree.tscn" id="6_imwft"]
+[ext_resource type="PackedScene" uid="uid://x4la8f4gtf8x" path="res://Prefabs/Buildings/ruin.tscn" id="7_hjipb"]
 
 [sub_resource type="GDScript" id="GDScript_cphue"]
 resource_name = "Surface"
@@ -14,30 +14,28 @@ script/source = "extends Level
 
 func _ready() -> void:
 	LevelLoader.levelStack.push_back(self)
- 
+	
+func back_from_mine() -> void:
+	transfer_resources()
+	
+func transfer_resources() -> void:
+	for resourceName: String in Players.resources:
+		if Players.resources[resourceName].amount == 0:
+			continue
+		
+		var amount = Players.resources[resourceName].amount
+		Players._resourceData.set_resource_amount(resourceName, 0)
+		for i in amount:
+			GameData._resourceData.set_resource_amount(resourceName, GameData.castleResources[resourceName].amount + 1)
+			await get_tree().create_timer(0.1).timeout
 "
 
-[sub_resource type="GDScript" id="GDScript_8jpg3"]
-resource_name = "Camera"
-script/source = "extends Camera2D
-
-@export var subject: Node2D
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	position = subject.position
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	position = lerp(position, subject.position, 0.04) 
-"
-
-[node name="Planes" type="Node2D"]
+[node name="Surface" type="Node2D"]
 script = SubResource("GDScript_cphue")
 
 [node name="Pozadina" type="Sprite2D" parent="."]
 position = Vector2(215, -67)
-texture = ExtResource("1_472bh")
+texture = ExtResource("1_yvs8g")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 15.0
@@ -48,35 +46,24 @@ color = Color(0.0680441, 0.0269621, 0.0214179, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." groups=["TileMap"]]
 tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAkAAAAAAAAAAAABAAoAAAAAAAAAAAABAAsAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAACAAgAAAAAAAAAAAACAAkAAAAAAAAAAAACAAoAAAAAAAAAAAACAAsAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAAAAAAAAAADAAkAAAAAAAAAAAADAAoAAAAAAAAAAAADAAsAAAAAAAAAAAAEAAcAAAAAAAAAAAAEAAgAAAAAAAAAAAAEAAkAAAAAAAAAAAAEAAoAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAFAAsAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAAAAAAAAAAGAAkAAAAAAAAAAAAGAAoAAAAAAAAAAAAGAAsAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAoAAAAAAAAAAAAHAAsAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAcAAAAAAAAAAAAIAAgAAAAAAAAAAAAIAAkAAAAAAAAAAAAIAAoAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAAJAAkAAAAAAAAAAAAJAAoAAAAAAAAAAAAJAAsAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAAAAAAKAAgAAAAAAAAAAAAKAAkAAAAAAAAAAAAKAAoAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAALAAcAAAAAAAAAAAALAAgAAAAAAAAAAAALAAkAAAAAAAAAAAALAAoAAAAAAAAAAAALAAsAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAoAAAAAAAAAAAAMAAsAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAANAAUAAAAAAAAAAAANAAYAAAAAAAAAAAANAAcAAAAAAAAAAAANAAgAAAAAAAAAAAANAAkAAAAAAAAAAAANAAoAAAAAAAAAAAANAAsAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAAAAAAOAAgAAAAAAAAAAAAOAAkAAAAAAAAAAAAOAAoAAAAAAAAAAAAOAAsAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAsAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAAAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAAAAAAQAAgAAAAAAAAAAAAQAAkAAAAAAAAAAAAQAAoAAAAAAAAAAAAQAAsAAAAAAAAAAAARAAMAAAAAAAAAAAARAAQAAAAAAAAAAAARAAUAAAAAAAAAAAARAAYAAAAAAAAAAAARAAcAAAAAAAAAAAARAAgAAAAAAAAAAAARAAkAAAAAAAAAAAARAAoAAAAAAAAAAAARAAsAAAAAAAAAAAASAAMAAAAAAAAAAAASAAQAAAAAAAAAAAASAAUAAAAAAAAAAAASAAYAAAAAAAAAAAASAAcAAAAAAAAAAAASAAgAAAAAAAAAAAASAAkAAAAAAAAAAAASAAoAAAAAAAAAAAASAAsAAAAAAAAAAAATAAMAAAAAAAAAAAATAAQAAAAAAAAAAAATAAUAAAAAAAAAAAATAAYAAAAAAAAAAAATAAcAAAAAAAAAAAATAAgAAAAAAAAAAAATAAkAAAAAAAAAAAATAAoAAAAAAAAAAAATAAsAAAAAAAAAAAAUAAMAAAAAAAAAAAAUAAQAAAAAAAAAAAAUAAUAAAAAAAAAAAAUAAYAAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAUAAkAAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAsAAAAAAAAAAAAVAAMAAAAAAAAAAAAVAAQAAAAAAAAAAAAVAAUAAAAAAAAAAAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAAVAAkAAAAAAAAAAAAVAAoAAAAAAAAAAAAVAAsAAAAAAAAAAAAWAAMAAAAAAAAAAAAWAAQAAAAAAAAAAAAWAAUAAAAAAAAAAAAWAAYAAAAAAAAAAAAWAAcAAAAAAAAAAAAWAAgAAAAAAAAAAAAWAAkAAAAAAAAAAAAWAAoAAAAAAAAAAAAWAAsAAAAAAAAAAAAXAAMAAAAAAAAAAAAXAAQAAAAAAAAAAAAXAAUAAAAAAAAAAAAXAAYAAAAAAAAAAAAXAAcAAAAAAAAAAAAXAAgAAAAAAAAAAAAXAAkAAAAAAAAAAAAXAAoAAAAAAAAAAAAXAAsAAAAAAAAAAAAYAAMAAAAAAAAAAAAYAAQAAAAAAAAAAAAYAAUAAAAAAAAAAAAYAAYAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAkAAAAAAAAAAAAYAAoAAAAAAAAAAAAYAAsAAAAAAAAAAAAZAAMAAAAAAAAAAAAZAAQAAAAAAAAAAAAZAAUAAAAAAAAAAAAZAAYAAAAAAAAAAAAZAAcAAAAAAAAAAAAZAAgAAAAAAAAAAAAZAAkAAAAAAAAAAAAZAAoAAAAAAAAAAAAZAAsAAAAAAAAAAAAaAAMAAAAAAAAAAAAaAAQAAAAAAAAAAAAaAAUAAAAAAAAAAAAaAAYAAAAAAAAAAAAaAAcAAAAAAAAAAAAaAAgAAAAAAAAAAAAaAAkAAAAAAAAAAAAaAAoAAAAAAAAAAAAaAAsAAAAAAAAAAAABAAIAAQAAAAAAAAADAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAKAAIAAQAAAAAAAAALAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAANAAIAAQAAAAAAAAAOAAIAAQAAAAAAAAAPAAIAAQAAAAAAAAAQAAIAAQAAAAAAAAARAAIAAQAAAAAAAAASAAIAAQAAAAAAAAATAAIAAQAAAAAAAAAUAAIAAQAAAAAAAAAVAAIAAQAAAAAAAAAWAAIAAQAAAAAAAAAXAAIAAQAAAAAAAAAYAAIAAQAAAAAAAAAZAAIAAQAAAAAAAAAaAAIAAQAAAAAAAAACAAMAAAAAAAAAAAACAAIAAQAAAAAAAAA=")
-tile_set = ExtResource("1_r2dbj")
+tile_set = ExtResource("2_wo82p")
 
-[node name="LiftTop2" parent="." instance=ExtResource("2_cphue")]
+[node name="Lift" parent="." instance=ExtResource("3_lxwo3")]
 position = Vector2(72, 24)
+nextLevel = "cave_level_1"
 
-[node name="Player" parent="." instance=ExtResource("3_1wtq7")]
+[node name="Player" parent="." instance=ExtResource("4_qyjal")]
 position = Vector2(54, 20)
 SPEED = 80.0
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("subject")]
-script = SubResource("GDScript_8jpg3")
+[node name="Camera2D" parent="." node_paths=PackedStringArray("subject") instance=ExtResource("5_jo3ps")]
 subject = NodePath("../Player")
-
-[node name="Resources" parent="Camera2D" instance=ExtResource("4_1wtq7")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-offset_left = 69.0
-offset_top = 21.0
-offset_right = 69.0
-offset_bottom = 21.0
-grow_horizontal = 0
-grow_vertical = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Trees" type="Node2D" parent="."]
 
-[node name="Tree" parent="Trees" instance=ExtResource("4_r2dbj")]
+[node name="Tree" parent="Trees" instance=ExtResource("6_imwft")]
 position = Vector2(88, 18)
 
-[node name="Sign" parent="." instance=ExtResource("5_1wtq7")]
+[node name="Ruin" parent="." instance=ExtResource("7_hjipb")]
 position = Vector2(137, 32)
+buildingName = "Farm"

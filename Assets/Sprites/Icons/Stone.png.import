@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lpybbmlu2gyo"
-path="res://.godot/imported/MeatIcon.png-40493091aa97a73046e0ed4956d548b6.ctex"
+uid="uid://jo1bxd878jts"
+path="res://.godot/imported/Stone.png-4d358731c318d51903e5a45fed5be2e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Icons/MeatIcon.png"
-dest_files=["res://.godot/imported/MeatIcon.png-40493091aa97a73046e0ed4956d548b6.ctex"]
+source_file="res://Assets/Sprites/Icons/Stone.png"
+dest_files=["res://.godot/imported/Stone.png-4d358731c318d51903e5a45fed5be2e8.ctex"]
 
 [params]
 

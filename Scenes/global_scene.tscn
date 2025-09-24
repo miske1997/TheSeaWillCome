@@ -19,6 +19,8 @@ visible = false
 [node name="DayNightCycle" type="Node" parent="."]
 script = ExtResource("2_rql2t")
 tick = 1.0
+gameTotalTime = 10
+timeIncrement = 1
 
 [node name="Timer" type="Timer" parent="DayNightCycle"]
 autostart = true

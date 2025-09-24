@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl8jnfootr6nu"
-path="res://.godot/imported/WoodIconpng.png-8907b28ba4a925c33dac53b01f360678.ctex"
+uid="uid://ckdmqr3u0aaj"
+path="res://.godot/imported/Glow2.png-436e7ccd0fc9a1baa06b4a6c477f69b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Icons/WoodIconpng.png"
-dest_files=["res://.godot/imported/WoodIconpng.png-8907b28ba4a925c33dac53b01f360678.ctex"]
+source_file="res://Assets/Sprites/Effects/Glow2.png"
+dest_files=["res://.godot/imported/Glow2.png-436e7ccd0fc9a1baa06b4a6c477f69b5.ctex"]
 
 [params]
 

@@ -11,7 +11,7 @@ func init_player_data() -> void:
 func load_adresses() -> void:
 	LevelLoader.levelAdresses = load_addresses("res://Scenes/Levels/")
 	Builder.prefabAdresses = load_addresses("res://Prefabs/")
-	SoundSystem.soundAdresses = load_addresses("res://Assets/Sounds/")
+	#SoundSystem.soundAdresses = load_addresses("res://Assets/Sounds/")
 
 func load_global_scene() -> void:
 	var globalScene := preload("res://Scenes/global_scene.tscn").instantiate()

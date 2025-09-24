@@ -27,7 +27,7 @@ func draw_req(buildMaterials: Resources):
 	for key: String in buildMaterials.resources:
 		var resourceData: ResourceData = buildMaterials.resources[key]
 		var resourceRequiermentUI = resourceRequierment.instantiate()
-		resourceRequiermentUI.get_child(0).texture = load(\"res://Assets/Sprites/Blocks/Grass.png\") # + resourceData.name
+		resourceRequiermentUI.get_child(0).texture = load(\"res://Assets/Sprites/Icons/\" + resourceData.name + \".png\")
 		resourceRequiermentUI.get_child(1).text = str(resourceData.amount)
 		resource_display.add_child(resourceRequiermentUI)
 		

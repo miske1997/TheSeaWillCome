@@ -37,7 +37,7 @@ func mine() -> void:
 	tree.amount -= toolConfig.mineAmount
 	var resourceName = tree.type
 	
-	Players._resourceData.set_resource_amount(resourceName, Players.resources[resourceName].amount + minedAmount)
+	GameData._resourceData.set_resource_amount(resourceName, GameData.castleResources[resourceName].amount + minedAmount)
 	
 	if tree.amount <= 0:
 		#animate

@@ -9,5 +9,9 @@ func _ready() -> void:
 
 func increment_time() -> void:
 	GameData.gameTime += timeIncrement
-	GameData.gameTime = GameData.gameTime % gameTotalTime
-	GameData.nightTime = GameData.gameTime > gameTotalTime / 2
+	if GameData.gameTime > gameTotalTime / 2.0 and not GameData.nightTime:
+		Events.nightFall.emit()
+	GameData.nightTime = GameData.gameTime > gameTotalTime / 2.0
+	GameData.gameTime %= gameTotalTime
+	
+	

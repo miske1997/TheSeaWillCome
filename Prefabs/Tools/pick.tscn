@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://nj5421ptdtbl"]
+[gd_scene load_steps=8 format=3 uid="uid://nj5421ptdtbl"]
 
 [ext_resource type="PackedScene" uid="uid://13aef0hucu22" path="res://Prefabs/Tools/tool.tscn" id="1_0klgy"]
 [ext_resource type="Script" uid="uid://coujtl442uo21" path="res://Scripts/Modules/Tools/Pick.gd" id="2_tr0ay"]
 [ext_resource type="Script" uid="uid://df4gqskgn8o76" path="res://Scripts/Resources/Tool/ToolConfig.gd" id="3_qny4e"]
+[ext_resource type="Texture2D" uid="uid://cnefmfjt3lh7l" path="res://Assets/Sprites/Tools/Pickaxe.png" id="4_fh06l"]
 
 [sub_resource type="Resource" id="Resource_fh06l"]
 script = ExtResource("3_qny4e")
@@ -31,6 +32,7 @@ top_level = true
 position = Vector2(4, -5)
 target_position = Vector2(0, 15)
 collision_mask = 4
+hit_from_inside = true
 collide_with_areas = true
 
 [node name="Path2D" type="Path2D" parent="." index="3"]
@@ -41,9 +43,13 @@ rotation = -0.348123
 loop = false
 
 [node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D" index="0"]
+visible = false
 rotation = 0.348123
 points = PackedVector2Array(0, 0, 4, -5, 1, -6, 6, -2)
 width = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D" index="1"]
+texture = ExtResource("4_fh06l")
 
 [node name="Timer" type="Timer" parent="." index="4"]
 

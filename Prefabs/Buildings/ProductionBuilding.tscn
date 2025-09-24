@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://lqgkh1tx2s3o"]
+
+[sub_resource type="GDScript" id="GDScript_trjnf"]
+resource_name = "ProductionBuilding"
+script/source = "extends Node2D
+
+@export var production: Resources
+
+func _ready() -> void:
+	Events.nightFall.connect(on_night_fall)
+	
+func on_night_fall() -> void:
+	for resourceName in production.resources:
+		GameData._resourceData.set_resource_amount(resourceName, GameData.castleResources[resourceName].amount + production.resources[resourceName].amount)
+"
+
+[node name="ProductionBuilding" type="Node2D"]
+script = SubResource("GDScript_trjnf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

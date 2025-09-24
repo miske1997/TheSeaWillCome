@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqxyr13enxljd"]
+
+[ext_resource type="PackedScene" uid="uid://lqgkh1tx2s3o" path="res://Prefabs/Buildings/ProductionBuilding.tscn" id="1_3e50s"]
+[ext_resource type="Script" uid="uid://cqjd746l483e" path="res://Scripts/Resources/ResourceData.gd" id="2_wi7le"]
+[ext_resource type="Script" uid="uid://bfcptypwxio55" path="res://Scripts/Resources/Resources.gd" id="3_uoo8t"]
+[ext_resource type="Texture2D" uid="uid://cmv4v6ji2i34" path="res://Assets/Sprites/Buildings/FarmWheat.png" id="4_uoo8t"]
+
+[sub_resource type="Resource" id="Resource_uoo8t"]
+script = ExtResource("2_wi7le")
+name = "Wheat"
+amount = 1
+metadata/_custom_type_script = "uid://cqjd746l483e"
+
+[sub_resource type="Resource" id="Resource_sxgwr"]
+script = ExtResource("3_uoo8t")
+resources = Dictionary[String, ExtResource("2_wi7le")]({
+"Wheat": SubResource("Resource_uoo8t")
+})
+metadata/_custom_type_script = "uid://bfcptypwxio55"
+
+[node name="Farm" instance=ExtResource("1_3e50s")]
+production = SubResource("Resource_sxgwr")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -5)
+texture = ExtResource("4_uoo8t")

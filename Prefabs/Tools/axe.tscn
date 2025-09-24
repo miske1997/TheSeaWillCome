@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://btt8faf07akqy"]
+[gd_scene load_steps=7 format=3 uid="uid://btt8faf07akqy"]
 
 [ext_resource type="PackedScene" uid="uid://13aef0hucu22" path="res://Prefabs/Tools/tool.tscn" id="1_8i5o1"]
 [ext_resource type="Script" uid="uid://iexohhgrrnlp" path="res://Scripts/Modules/Tools/Axe.gd" id="2_cgfjg"]
 [ext_resource type="Script" uid="uid://df4gqskgn8o76" path="res://Scripts/Resources/Tool/ToolConfig.gd" id="3_23cue"]
+[ext_resource type="Texture2D" uid="uid://ojvvrv5g4khg" path="res://Assets/Sprites/Tools/Axe.png" id="4_vkurk"]
 
 [sub_resource type="Resource" id="Resource_vkurk"]
 script = ExtResource("3_23cue")
@@ -28,9 +29,15 @@ curve = SubResource("Curve2D_23cue")
 rotation = -0.348123
 loop = false
 
-[node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D" index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D" index="0"]
+position = Vector2(3.16118, 0.083387)
+texture = ExtResource("4_vkurk")
+
+[node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D" index="1"]
+visible = false
 points = PackedVector2Array(0, 0, 4, -5, 7, -4, 4, -2)
 width = 2.0
+texture = ExtResource("4_vkurk")
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="3"]
 top_level = true

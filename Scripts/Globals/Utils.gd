@@ -17,4 +17,4 @@ func castleHasResources(resources: Resources) -> bool:
 func payResources(resources: Resources) -> void:
 	for key: String in resources.resources:
 		var resourceData: ResourceData = resources.resources[key]
-		GameData.castleResources[key].amount -= resourceData.amount
+		GameData._resourceData.set_resource_amount(resourceData.name, GameData.castleResources[key].amount - resourceData.amount)

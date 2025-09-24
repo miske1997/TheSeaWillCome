@@ -1,13 +1,7 @@
-[gd_resource type="Resource" script_class="Resources" load_steps=6 format=3 uid="uid://bi4ql1ifh8xjp"]
+[gd_resource type="Resource" script_class="Resources" load_steps=7 format=3 uid="uid://bi4ql1ifh8xjp"]
 
 [ext_resource type="Script" uid="uid://cqjd746l483e" path="res://Scripts/Resources/ResourceData.gd" id="1_le6a2"]
 [ext_resource type="Script" uid="uid://bfcptypwxio55" path="res://Scripts/Resources/Resources.gd" id="2_n6usg"]
-
-[sub_resource type="Resource" id="Resource_tq2s8"]
-script = ExtResource("1_le6a2")
-name = "Grass"
-amount = 0
-metadata/_custom_type_script = "uid://cqjd746l483e"
 
 [sub_resource type="Resource" id="Resource_use28"]
 script = ExtResource("1_le6a2")
@@ -21,11 +15,24 @@ name = "Wood"
 amount = 2
 metadata/_custom_type_script = "uid://cqjd746l483e"
 
+[sub_resource type="Resource" id="Resource_le6a2"]
+script = ExtResource("1_le6a2")
+name = "Housing"
+amount = 0
+metadata/_custom_type_script = "uid://cqjd746l483e"
+
+[sub_resource type="Resource" id="Resource_n6usg"]
+script = ExtResource("1_le6a2")
+name = "Wheat"
+amount = 0
+metadata/_custom_type_script = "uid://cqjd746l483e"
+
 [resource]
 script = ExtResource("2_n6usg")
 resources = Dictionary[String, ExtResource("1_le6a2")]({
-"Grass": SubResource("Resource_tq2s8"),
+"Housing": SubResource("Resource_le6a2"),
 "Stone": SubResource("Resource_use28"),
+"Wheat": SubResource("Resource_n6usg"),
 "Wood": SubResource("Resource_w3cv2")
 })
 metadata/_custom_type_script = "uid://bfcptypwxio55"

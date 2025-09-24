@@ -23,7 +23,8 @@ func _process(delta: float) -> void:
 		path_follow_2d.progress_ratio = 0
 
 func look_at_target():
-	look_at(get_global_mouse_position())
+	#look_at(get_global_mouse_position())
+	pass
 	
 	
 func mine() -> void:
@@ -31,6 +32,8 @@ func mine() -> void:
 		return
 	var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
 	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point())
+	if not tilemap.get_cell_tile_data(tileCoords):
+		return
 	var data := tilemap.get_cell_tile_data(tileCoords)
 	var amount = data.get_custom_data("ResourceAmount")
 	var resourceName: String = data.get_custom_data("Type")
@@ -50,14 +53,6 @@ func mine_block():
 	var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
 	var outlineTiles: TileMapLayer = tilemap.get_parent().get_node("Outlines")
 	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point())
-	var data := tilemap.get_cell_tile_data(tileCoords)
-	if data == null:
-		return
-		
-	var amount = data.get_custom_data("ResourceAmount")
-	var resourceName: String = data.get_custom_data("Type")
-	var mineTime: float = data.get_custom_data("mineTime")
-	Players._resourceData.set_resource_amount(resourceName, Players.resources[resourceName].amount + amount)
 	tilemap.erase_cell(tileCoords) 
 	outlineTiles.erase_cell(tileCoords)
 

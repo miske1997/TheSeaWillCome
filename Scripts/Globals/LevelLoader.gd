@@ -14,7 +14,7 @@ func back_to_main_menu() -> void:
 	levelStack.clear()
 	var mainMenu = mainMenuScene.instantiate()
 	get_tree().root.add_child(mainMenu)
-	
+
 
 func push_level(levelName) -> bool:
 	if not levelAdresses.has(levelName):
