@@ -11,6 +11,17 @@ script/source = "extends PanelContainer
 
 func _ready() -> void:
 	GameData._resourceData.resourceChanged.connect(on_resource_changed)
+	Players.carryWeightChanged.connect(on_carry_weight_changed)
+	draw_castle_resources()
+	draw_player_carry_weight()
+
+func draw_player_carry_weight():
+	var label := template.get_node(\"Amount\").duplicate()
+	label.text = \"0/\" + str(Players.carryCapacity)
+	label.name = \"CarryWeight\"
+	container.add_child(label)
+
+func draw_castle_resources():
 	for key in GameData.castleResources:
 		var resourceDisplay = template.duplicate()
 		resourceDisplay.name = key
@@ -19,6 +30,9 @@ func _ready() -> void:
 		resourceDisplay.get_node(\"Amount\").text = str(GameData.castleResources[key].amount)
 		container.add_child(resourceDisplay)
 
+
+func on_carry_weight_changed():
+	container.get_node(\"CarryWeight\").text = str(Players.weightInBackpack) + \"/\" + str(Players.carryCapacity)
 
 func on_resource_changed(resourceName: String) -> void:
 	if not container.has_node(resourceName):

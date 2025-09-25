@@ -37,12 +37,15 @@ func mine() -> void:
 	var data := tilemap.get_cell_tile_data(tileCoords)
 	var amount = data.get_custom_data("ResourceAmount")
 	var resourceName: String = data.get_custom_data("Type")
+	var weight: int = data.get_custom_data("Weight")
+	if Players.weightInBackpack + weight > Players.carryCapacity:
+		return
 	var minedAmount = toolConfig.mineAmount
 	if toolConfig.mineAmount > amount:
 		minedAmount = amount
 	
 	amount -= toolConfig.mineAmount
-	Players._resourceData.set_resource_amount(resourceName, Players.resources[resourceName].amount + minedAmount)
+	Players.add_resource_to_backpack(resourceName, minedAmount, weight)
 	
 	if amount <= 0:
 		#animate

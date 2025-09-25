@@ -11,6 +11,7 @@ texture = ExtResource("1_5ufsb")
 0:0/0/custom_data_0 = "Stone"
 0:0/0/custom_data_1 = 1
 0:0/0/custom_data_2 = 2.0
+0:0/0/custom_data_3 = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_472bh"]
 resource_name = "Grass"
@@ -30,5 +31,7 @@ custom_data_layer_1/name = "ResourceAmount"
 custom_data_layer_1/type = 2
 custom_data_layer_2/name = "mineTime"
 custom_data_layer_2/type = 3
+custom_data_layer_3/name = "Weight"
+custom_data_layer_3/type = 2
 sources/0 = SubResource("TileSetAtlasSource_cphue")
 sources/1 = SubResource("TileSetAtlasSource_472bh")

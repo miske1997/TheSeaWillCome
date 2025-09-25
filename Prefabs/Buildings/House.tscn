@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci7ra8gg60i0s"]
+[gd_scene load_steps=8 format=3 uid="uid://ci7ra8gg60i0s"]
 
 [ext_resource type="Texture2D" uid="uid://o0imuxsdelr1" path="res://Assets/Sprites/Buildings/House1.png" id="1_ho7co"]
+[ext_resource type="Script" uid="uid://cqjd746l483e" path="res://Scripts/Resources/ResourceData.gd" id="1_x2k1b"]
+[ext_resource type="Script" uid="uid://bfcptypwxio55" path="res://Scripts/Resources/Resources.gd" id="2_bqd1r"]
+[ext_resource type="PackedScene" uid="uid://jusoh4mcfs6q" path="res://Scenes/Components/building_upgrade.tscn" id="2_om16p"]
 
 [sub_resource type="GDScript" id="GDScript_ho7co"]
 resource_name = "House"
@@ -10,9 +13,26 @@ func _ready() -> void:
 	GameData._resourceData.set_resource_amount(\"Housing\", GameData.castleResources[\"Housing\"].amount + 1)
 "
 
+[sub_resource type="Resource" id="Resource_x2k1b"]
+script = ExtResource("1_x2k1b")
+name = "Wood"
+amount = 1
+metadata/_custom_type_script = "uid://cqjd746l483e"
+
+[sub_resource type="Resource" id="Resource_bqd1r"]
+script = ExtResource("2_bqd1r")
+resources = Dictionary[String, ExtResource("1_x2k1b")]({
+"Wood": SubResource("Resource_x2k1b")
+})
+metadata/_custom_type_script = "uid://bfcptypwxio55"
+
 [node name="House" type="Node2D"]
 script = SubResource("GDScript_ho7co")
 
 [node name="House1" type="Sprite2D" parent="."]
 position = Vector2(0, -5.52099)
 texture = ExtResource("1_ho7co")
+
+[node name="BuildingUpgrade" parent="." instance=ExtResource("2_om16p")]
+buildMaterials = SubResource("Resource_bqd1r")
+buildingName = "House2"

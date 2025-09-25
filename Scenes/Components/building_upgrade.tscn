@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://jusoh4mcfs6q"]
+
+[ext_resource type="PackedScene" uid="uid://daxwc4f85i8q4" path="res://Scenes/Components/interactible.tscn" id="1_jaoqa"]
+[ext_resource type="PackedScene" uid="uid://cw8vjiogyjfxx" path="res://Scenes/UI/build_cost_display.tscn" id="2_tenod"]
+
+[sub_resource type="GDScript" id="GDScript_13n31"]
+resource_name = "BuildingUpgrade"
+script/source = "extends Node2D
+
+@export var buildMaterials: Resources
+@export var buildingName: String
+
+signal upgreaded
+
+func _ready() -> void:
+	$Interact/BuildCostDisplay.draw_req(buildMaterials)
+
+
+func _on_interact_interacted() -> void:
+	if not Utils.castleHasResources(buildMaterials):
+		return
+	upgreaded.emit()
+	var building := Builder.makeBuilding(buildingName, buildMaterials)
+	building.position = position
+	get_parent().add_child(building)
+	queue_free()
+"
+
+[node name="BuildingUpgrade" type="Node2D"]
+script = SubResource("GDScript_13n31")
+
+[node name="Interact" parent="." instance=ExtResource("1_jaoqa")]
+
+[node name="BuildCostDisplay" parent="Interact" instance=ExtResource("2_tenod")]
+visible = false
+offset_top = -17.0
+offset_bottom = -4.0
+
+[connection signal="interacted" from="Interact" to="." method="_on_interact_interacted"]

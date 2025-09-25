@@ -67,3 +67,6 @@ position = Vector2(88, 18)
 [node name="Ruin" parent="." instance=ExtResource("7_hjipb")]
 position = Vector2(137, 32)
 buildingName = "Farm"
+
+[node name="Ruin2" parent="." instance=ExtResource("7_hjipb")]
+position = Vector2(167, 32)
