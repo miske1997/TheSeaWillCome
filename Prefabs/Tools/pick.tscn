@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://nj5421ptdtbl"]
+[gd_scene load_steps=9 format=3 uid="uid://nj5421ptdtbl"]
 
 [ext_resource type="PackedScene" uid="uid://13aef0hucu22" path="res://Prefabs/Tools/tool.tscn" id="1_0klgy"]
 [ext_resource type="Script" uid="uid://coujtl442uo21" path="res://Scripts/Modules/Tools/Pick.gd" id="2_tr0ay"]
 [ext_resource type="Script" uid="uid://df4gqskgn8o76" path="res://Scripts/Resources/Tool/ToolConfig.gd" id="3_qny4e"]
 [ext_resource type="Texture2D" uid="uid://cnefmfjt3lh7l" path="res://Assets/Sprites/Tools/Pickaxe.png" id="4_fh06l"]
+[ext_resource type="Texture2D" uid="uid://ojvvrv5g4khg" path="res://Assets/Sprites/Tools/Axe.png" id="5_gfgy7"]
 
 [sub_resource type="Resource" id="Resource_fh06l"]
 script = ExtResource("3_qny4e")
@@ -13,7 +14,7 @@ metadata/_custom_type_script = "uid://df4gqskgn8o76"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0klgy"]
 
-[sub_resource type="Curve2D" id="Curve2D_tr0ay"]
+[sub_resource type="Curve2D" id="Curve2D_ys0i2"]
 bake_interval = 2.0
 _data = {
 "points": PackedVector2Array(-5.47954, 1.98854, 5.47954, -1.98854, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 2, 1)
@@ -35,22 +36,23 @@ collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="Path2D" type="Path2D" parent="." index="3"]
-curve = SubResource("Curve2D_tr0ay")
+[node name="Timer" type="Timer" parent="." index="3"]
+
+[node name="Path2D" type="Path2D" parent="." index="4"]
+curve = SubResource("Curve2D_ys0i2")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
 rotation = -0.348123
 loop = false
 
-[node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D" index="0"]
-visible = false
-rotation = 0.348123
-points = PackedVector2Array(0, 0, 4, -5, 1, -6, 6, -2)
-width = 2.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D" index="1"]
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D" index="0"]
+position = Vector2(3.16118, 0.083387)
 texture = ExtResource("4_fh06l")
 
-[node name="Timer" type="Timer" parent="." index="4"]
+[node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D" index="1"]
+visible = false
+points = PackedVector2Array(0, 0, 4, -5, 7, -4, 4, -2)
+width = 2.0
+texture = ExtResource("5_gfgy7")
 
 [connection signal="timeout" from="Timer" to="." method="mine"]

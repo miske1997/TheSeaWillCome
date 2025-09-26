@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("Click"):
 		deactivate_tool()
 	if inUse:
-		path_follow_2d.progress_ratio = (toolConfig.mineSpeed - timer.time_left) / toolConfig.mineSpeed
+		path_follow_2d.progress_ratio = (timer.wait_time - timer.time_left) / timer.wait_time
 	else:
 		path_follow_2d.progress_ratio = 0
 
@@ -38,6 +38,7 @@ func mine() -> void:
 	var amount = data.get_custom_data("ResourceAmount")
 	var resourceName: String = data.get_custom_data("Type")
 	var weight: int = data.get_custom_data("Weight")
+	var mineTime: int = data.get_custom_data("MineTime")
 	if Players.weightInBackpack + weight > Players.carryCapacity:
 		return
 	var minedAmount = toolConfig.mineAmount
@@ -62,6 +63,14 @@ func mine_block():
 func activate_tool() -> void:
 	if not $RayCast2D.get_collider():
 		return
+	var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
+	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point())
+	if not tilemap.get_cell_tile_data(tileCoords):
+		return
+	var data := tilemap.get_cell_tile_data(tileCoords)
+	var weight: int = data.get_custom_data("Weight")
+	var mineTime: int = data.get_custom_data("MineTime")
+	timer.wait_time = mineTime * toolConfig.mineSpeed
 	inUse = true
 	timer.start()
 	

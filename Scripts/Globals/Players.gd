@@ -1,12 +1,11 @@
 extends Node
 
-
 var playerCharacter: Node : set = _set_character
 var playerName: String
 var highScore: int
 var resources: Dictionary[String, ResourceData] : get = _get_resources
 var _resourceData: Resources
-var carryCapacity: int = 2
+var carryCapacity: int = 8
 var weightInBackpack: int = 0 : set = _set_weight_in_backpack
 
 signal carryWeightChanged

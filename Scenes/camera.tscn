@@ -22,6 +22,7 @@ func _process(delta: float) -> void:
 bg_color = Color(0.10748, 0.10748, 0.10748, 1)
 
 [node name="Camera2D" type="Camera2D"]
+light_mask = 0
 anchor_mode = 0
 script = SubResource("GDScript_8jpg3")
 
@@ -38,6 +39,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_f1cf7")
 
 [node name="Resources" parent="." instance=ExtResource("1_375tr")]
 visible = false
+light_mask = 0
 anchors_preset = 1
 anchor_left = 1.0
 anchor_bottom = 0.0

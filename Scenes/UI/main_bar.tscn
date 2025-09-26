@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgys2usqr4ia0"]
+[gd_scene load_steps=4 format=3 uid="uid://dgys2usqr4ia0"]
 
 [ext_resource type="Texture2D" uid="uid://dl8jnfootr6nu" path="res://Assets/Sprites/Icons/Wood.png" id="1_c06vt"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6j3fs"]
+light_mode = 1
 
 [sub_resource type="GDScript" id="GDScript_c06vt"]
 resource_name = "MainBar"
@@ -42,6 +45,8 @@ func on_resource_changed(resourceName: String) -> void:
 "
 
 [node name="Bar" type="PanelContainer"]
+light_mask = 0
+material = SubResource("CanvasItemMaterial_6j3fs")
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.083
@@ -51,19 +56,27 @@ grow_vertical = 2
 script = SubResource("GDScript_c06vt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+light_mask = 0
+use_parent_material = true
 layout_mode = 2
 
 [node name="Template" type="HBoxContainer" parent="HBoxContainer"]
 visible = false
+light_mask = 0
+use_parent_material = true
 layout_mode = 2
 
 [node name="Img" type="TextureRect" parent="HBoxContainer/Template"]
+light_mask = 0
+use_parent_material = true
 layout_mode = 2
 texture = ExtResource("1_c06vt")
 expand_mode = 3
 stretch_mode = 4
 
 [node name="Amount" type="Label" parent="HBoxContainer/Template"]
+light_mask = 0
+use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 6
 text = "5"

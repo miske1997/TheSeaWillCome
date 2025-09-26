@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://baplxswkbfgfv"]
+[gd_scene load_steps=3 format=3 uid="uid://baplxswkbfgfv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6j3fs"]
+light_mode = 1
 
 [sub_resource type="GDScript" id="GDScript_6j3fs"]
 resource_name = "LiftUI"
@@ -16,22 +19,40 @@ func _on_level_1_pressed() -> void:
 	LevelLoader.push_level(levelName)
 	if levelName == \"surfice\":
 		LevelLoader.levelStack.back().back_from_mine()
+
+
+func _on_level_2_pressed() -> void:
+	LevelLoader.pop_level()
+	var levelName = \"cave_level_2\"
+	LevelLoader.push_level(levelName)
+	if levelName == \"surfice\":
+		LevelLoader.levelStack.back().back_from_mine()
 "
 
 [node name="LiftUI" type="Panel"]
+material = SubResource("CanvasItemMaterial_6j3fs")
 offset_right = 59.0
 offset_bottom = 17.0
 script = SubResource("GDScript_6j3fs")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+use_parent_material = true
 layout_mode = 2
 offset_right = 59.0
 offset_bottom = 17.0
 
 [node name="Level1" type="Button" parent="VBoxContainer"]
+use_parent_material = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 6
 text = "Level 1"
 
+[node name="Level2" type="Button" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "Level 2"
+
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="pressed" from="VBoxContainer/Level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level2" to="." method="_on_level_2_pressed"]

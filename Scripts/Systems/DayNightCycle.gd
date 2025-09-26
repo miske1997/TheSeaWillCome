@@ -6,6 +6,7 @@ extends Node
 
 func _ready() -> void:
 	$Timer.wait_time = tick
+	GameData.gameTotalTime = gameTotalTime
 
 func increment_time() -> void:
 	GameData.gameTime += timeIncrement
