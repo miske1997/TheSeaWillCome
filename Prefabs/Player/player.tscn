@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://eyb8bumt5at6"]
+[gd_scene load_steps=11 format=3 uid="uid://eyb8bumt5at6"]
 
 [ext_resource type="Script" uid="uid://csrtqsdjrnp64" path="res://Scripts/Modules/player.gd" id="1_6dc14"]
 [ext_resource type="Texture2D" uid="uid://da1sic4m1qffs" path="res://Assets/Sprites/Characters/KingSide.png" id="2_hnwp3"]
 [ext_resource type="PackedScene" uid="uid://d04un2ocoolw7" path="res://Scenes/multitool.tscn" id="3_sysjd"]
+[ext_resource type="Texture2D" uid="uid://ckdmqr3u0aaj" path="res://Assets/Sprites/Effects/Glow2.png" id="4_you5p"]
+[ext_resource type="Texture2D" uid="uid://ct07iw4ifrvbq" path="res://Assets/Sprites/Effects/GradiantLight.png" id="5_ucnkw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sysjd"]
 atlas = ExtResource("2_hnwp3")
@@ -73,9 +75,12 @@ func get_interactibles():
 	return interactibles
 "
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ine62"]
+blend_mode = 3
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 4096
-collision_mask = 4
+collision_mask = 36
 script = ExtResource("1_6dc14")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -92,3 +97,23 @@ script = SubResource("GDScript_sysjd")
 [node name="WallDetect" type="RayCast2D" parent="."]
 target_position = Vector2(3.5, 0)
 collision_mask = 4
+
+[node name="Shadows" type="PointLight2D" parent="."]
+visible = false
+energy = 200.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_color = Color(0.0999859, 0.099986, 0.099986, 0)
+shadow_filter_smooth = 19.9
+shadow_item_cull_mask = 2
+texture = ExtResource("4_you5p")
+texture_scale = 8.52
+
+[node name="Light" type="PointLight2D" parent="."]
+material = SubResource("CanvasItemMaterial_ine62")
+color = Color(0.471311, 0.29208, 0.155877, 1)
+energy = 300.0
+shadow_color = Color(0.2484, 0.2484, 0.2484, 0)
+shadow_filter_smooth = 19.9
+texture = ExtResource("5_ucnkw")
+texture_scale = 2.0

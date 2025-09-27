@@ -2,7 +2,7 @@ class_name Pick extends Tool
 
 @onready var timer: Timer = $Timer
 @onready var path_follow_2d: PathFollow2D = $Path2D/PathFollow2D
-
+var tilemap: TileMapLayer
 func _ready() -> void:
 	activate.connect(activate_tool)
 	
@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 	if not enabled:
 		return
 	look_at_target()
-	$RayCast2D.position = global_position
+	#$RayCast2D.global_position = global_position
 	$RayCast2D.target_position = get_local_mouse_position()
 	$RayCast2D.rotation = rotation
 	if Input.is_action_just_pressed("Click"):
@@ -30,8 +30,7 @@ func look_at_target():
 func mine() -> void:
 	if not inUse:
 		return
-	var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
-	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point())
+	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - tilemap.global_position)
 	if not tilemap.get_cell_tile_data(tileCoords):
 		return
 	var data := tilemap.get_cell_tile_data(tileCoords)
@@ -39,6 +38,7 @@ func mine() -> void:
 	var resourceName: String = data.get_custom_data("Type")
 	var weight: int = data.get_custom_data("Weight")
 	var mineTime: int = data.get_custom_data("MineTime")
+	
 	if Players.weightInBackpack + weight > Players.carryCapacity:
 		return
 	var minedAmount = toolConfig.mineAmount
@@ -52,19 +52,21 @@ func mine() -> void:
 		#animate
 		deactivate_tool()
 		mine_block()
+	else:
+		data.set_custom_data("ResourceAmount", amount)
 
 func mine_block():
-	var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
+	#var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
 	var outlineTiles: TileMapLayer = tilemap.get_parent().get_node("Outlines")
-	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point())
+	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - tilemap.global_position)
 	tilemap.erase_cell(tileCoords) 
 	outlineTiles.erase_cell(tileCoords)
 
 func activate_tool() -> void:
 	if not $RayCast2D.get_collider():
 		return
-	var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
-	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point())
+	tilemap = $RayCast2D.get_collider()
+	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - tilemap.global_position)
 	if not tilemap.get_cell_tile_data(tileCoords):
 		return
 	var data := tilemap.get_cell_tile_data(tileCoords)

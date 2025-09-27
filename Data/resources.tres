@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://bfcptypwxio55" path="res://Scripts/Resources/Resources.gd" id="1_ro5bo"]
 [ext_resource type="Script" uid="uid://cqjd746l483e" path="res://Scripts/Resources/ResourceData.gd" id="1_use28"]
 
+[sub_resource type="Resource" id="Resource_tq2s8"]
+script = ExtResource("1_use28")
+name = "Ore"
+amount = 0
+metadata/_custom_type_script = "uid://cqjd746l483e"
+
 [sub_resource type="Resource" id="Resource_use28"]
 script = ExtResource("1_use28")
 name = "Stone"
@@ -12,12 +18,6 @@ metadata/_custom_type_script = "uid://cqjd746l483e"
 [sub_resource type="Resource" id="Resource_w3cv2"]
 script = ExtResource("1_use28")
 name = "Wood"
-amount = 0
-metadata/_custom_type_script = "uid://cqjd746l483e"
-
-[sub_resource type="Resource" id="Resource_tq2s8"]
-script = ExtResource("1_use28")
-name = "Ore"
 amount = 0
 metadata/_custom_type_script = "uid://cqjd746l483e"
 

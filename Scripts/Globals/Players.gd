@@ -7,6 +7,7 @@ var resources: Dictionary[String, ResourceData] : get = _get_resources
 var _resourceData: Resources
 var carryCapacity: int = 8
 var weightInBackpack: int = 0 : set = _set_weight_in_backpack
+var character: Player
 
 signal carryWeightChanged
 

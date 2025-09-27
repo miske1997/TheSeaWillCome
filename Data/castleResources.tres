@@ -9,6 +9,12 @@ name = "Housing"
 amount = 0
 metadata/_custom_type_script = "uid://cqjd746l483e"
 
+[sub_resource type="Resource" id="Resource_rfmp1"]
+script = ExtResource("1_le6a2")
+name = "Ore"
+amount = 0
+metadata/_custom_type_script = "uid://cqjd746l483e"
+
 [sub_resource type="Resource" id="Resource_use28"]
 script = ExtResource("1_le6a2")
 name = "Stone"
@@ -30,12 +36,6 @@ metadata/_custom_type_script = "uid://cqjd746l483e"
 [sub_resource type="Resource" id="Resource_yevqi"]
 script = ExtResource("1_le6a2")
 name = "Workers"
-amount = 0
-metadata/_custom_type_script = "uid://cqjd746l483e"
-
-[sub_resource type="Resource" id="Resource_rfmp1"]
-script = ExtResource("1_le6a2")
-name = "Ore"
 amount = 0
 metadata/_custom_type_script = "uid://cqjd746l483e"
 

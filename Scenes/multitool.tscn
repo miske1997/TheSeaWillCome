@@ -11,7 +11,7 @@ var selectedTool: Node2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 func _process(delta: float) -> void:
-	$RayCast2D.position = global_position
+	#$RayCast2D.global_position = global_position
 	$RayCast2D.target_position = get_local_mouse_position().normalized() * 20
 	$RayCast2D.rotation = rotation
 	
@@ -43,7 +43,6 @@ func hide_tool():
 script = SubResource("GDScript_p0lur")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-top_level = true
 collision_mask = 20
 collide_with_areas = true
 

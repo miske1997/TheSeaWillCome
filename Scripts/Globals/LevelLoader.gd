@@ -4,6 +4,7 @@ var mainMenuScene: PackedScene = preload("res://Scenes/UI/main_menu.tscn")
 var levelAdresses: Dictionary[String, String] = {}
 var levelStack: Array[Node] = []
 
+var levelDic: Dictionary[String, Node2D] = {}
 
 func load_level_with_effects() -> void:
 	pass
@@ -19,7 +20,7 @@ func back_to_main_menu() -> void:
 func push_level(levelName) -> bool:
 	if not levelAdresses.has(levelName):
 		return false
-	var level: Node = load(levelAdresses[levelName]).instantiate()
+	var level: Node = levelDic[levelName]
 	levelStack.push_back(level)
 	get_tree().root.add_child(level)
 	level.focus()
@@ -30,4 +31,15 @@ func pop_level() -> void:
 		return
 	var currentLevel: Node = levelStack.pop_back()
 	currentLevel.un_focus()
-	currentLevel.queue_free()
+
+func pre_load_levels():
+	var levelStep = 5000
+	for i in 2:
+		var level: Level = load("res://Scenes/Levels/cave_level_" + str(i + 1) + ".tscn").instantiate()
+		level.position = Vector2(0, (i + 1) * levelStep)
+		level.init()
+		level.un_focus()
+		get_tree().root.add_child(level)
+		levelDic.set("cave_level_" + str(i + 1), level)
+		
+	

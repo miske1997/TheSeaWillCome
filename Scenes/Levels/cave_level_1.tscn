@@ -1,15 +1,11 @@
-[gd_scene load_steps=16 format=4 uid="uid://muobnhaw8gx1"]
+[gd_scene load_steps=11 format=4 uid="uid://muobnhaw8gx1"]
 
 [ext_resource type="TileSet" uid="uid://qqtgrsrtixc7" path="res://Assets/Tilemaps/Planes.tres" id="1_2paow"]
 [ext_resource type="Script" uid="uid://buojah2rm7tui" path="res://Scripts/Modules/Level.gd" id="1_sdny6"]
 [ext_resource type="Texture2D" uid="uid://cb4smwjso1yd2" path="res://Assets/Sprites/Blocks/BlockOutline.png" id="2_6hen4"]
-[ext_resource type="PackedScene" uid="uid://eyb8bumt5at6" path="res://Prefabs/Player/player.tscn" id="2_42nt2"]
 [ext_resource type="Texture2D" uid="uid://cohqp5vn6rmjl" path="res://Assets/Sprites/Buildings/LiftRope.png" id="2_sdny6"]
 [ext_resource type="Texture2D" uid="uid://bxe1xgdusu4j" path="res://Assets/Sprites/Buildings/LiftPlank.png" id="4_6hen4"]
-[ext_resource type="PackedScene" uid="uid://bkqt85ww3j77d" path="res://Scenes/camera.tscn" id="5_6hen4"]
-[ext_resource type="Texture2D" uid="uid://ckdmqr3u0aaj" path="res://Assets/Sprites/Effects/Glow2.png" id="5_iqkdf"]
 [ext_resource type="PackedScene" uid="uid://btg0mnufcdcba" path="res://Prefabs/Buildings/lift.tscn" id="7_ki7o3"]
-[ext_resource type="Texture2D" uid="uid://ct07iw4ifrvbq" path="res://Assets/Sprites/Effects/GradiantLight.png" id="9_duftc"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iqkdf"]
 polygon = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
@@ -27,9 +23,6 @@ sources/0 = SubResource("TileSetAtlasSource_ki7o3")
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iqkdf"]
 blend_mode = 2
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_duftc"]
-blend_mode = 3
-
 [node name="CaveLevel1" type="Node2D"]
 script = ExtResource("1_sdny6")
 
@@ -42,7 +35,6 @@ offset_bottom = 513.0
 color = Color(0, 0, 0, 1)
 
 [node name="Lighting" type="Node2D" parent="."]
-modulate = Color(0.00392157, 0.00392157, 0.00392157, 1)
 
 [node name="Outlines" type="TileMapLayer" parent="Lighting"]
 light_mask = 0
@@ -89,29 +81,5 @@ offset_top = -128.0
 offset_right = 899.0
 offset_bottom = 513.0
 
-[node name="Player" parent="." instance=ExtResource("2_42nt2")]
-position = Vector2(56, 24)
-SPEED = 80.0
-
-[node name="Shadows" type="PointLight2D" parent="Player"]
-visible = false
-energy = 200.0
-range_item_cull_mask = 2
-shadow_enabled = true
-shadow_color = Color(0.0999859, 0.099986, 0.099986, 0)
-shadow_filter_smooth = 19.9
-shadow_item_cull_mask = 2
-texture = ExtResource("5_iqkdf")
-texture_scale = 8.52
-
-[node name="Light" type="PointLight2D" parent="Player"]
-material = SubResource("CanvasItemMaterial_duftc")
-color = Color(0.471311, 0.29208, 0.155877, 1)
-energy = 300.0
-shadow_color = Color(0.2484, 0.2484, 0.2484, 0)
-shadow_filter_smooth = 19.9
-texture = ExtResource("9_duftc")
-texture_scale = 2.0
-
-[node name="Camera2D" parent="." node_paths=PackedStringArray("subject") instance=ExtResource("5_6hen4")]
-subject = NodePath("../Player")
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(56, 17)

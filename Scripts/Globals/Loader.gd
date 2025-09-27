@@ -4,6 +4,7 @@ func _ready() -> void:
 	load_global_scene()
 	load_adresses()
 	init_player_data()
+	LevelLoader.pre_load_levels()
 	
 func init_player_data() -> void:
 	Players._resourceData = preload("res://Data/resources.tres")

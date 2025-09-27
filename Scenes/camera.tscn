@@ -11,7 +11,7 @@ script/source = "extends Camera2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	position = subject.position - get_viewport_rect().size / 2
-
+	Players.character = subject
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -21,13 +21,13 @@ func _process(delta: float) -> void:
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1cf7"]
 bg_color = Color(0.10748, 0.10748, 0.10748, 1)
 
-[node name="Camera2D" type="Camera2D"]
+[node name="Camera2D" type="Camera2D" groups=["Camera"]]
 light_mask = 0
 anchor_mode = 0
 script = SubResource("GDScript_8jpg3")
 
 [node name="Bar" parent="." instance=ExtResource("1_f1cf7")]
-light_mask = 0
+z_index = 4096
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0

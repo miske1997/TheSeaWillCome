@@ -6,6 +6,9 @@ var wallJumpDuration := 0.3
 var wallJumpTimeout := 0.0
 @onready var wall_detect: RayCast2D = $WallDetect
 
+func _ready() -> void:
+	light_off()
+
 func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
@@ -31,5 +34,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-
 	move_and_slide()
+	
+func light_on():
+	$Light.enabled = true
+	
+func light_off():
+	$Light.enabled = false
