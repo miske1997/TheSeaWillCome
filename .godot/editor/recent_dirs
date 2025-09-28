@@ -1,3 +1,5 @@
+res://Scripts/Globals
+res://Prefabs/Enemies
 res://Assets/Sprites/Blocks
 res://Scenes/Components
 res://Prefabs/Buildings
@@ -13,4 +15,3 @@ res://Assets/Sprites
 res://Prefabs/Player
 res://Scripts/Modules
 res://Scripts/Components
-res://Scripts/Globals

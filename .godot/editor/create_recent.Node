@@ -1,8 +1,10 @@
+Node
+Sprite2D
+CollisionShape2D
+CharacterBody2D
 Node2D
 DirectionalLight2D
-Node
 RayCast2D
-Sprite2D
 ColorRect
 PointLight2D
 PanelContainer
@@ -10,5 +12,3 @@ Label
 TextureRect
 HBoxContainer
 Panel
-Button
-VBoxContainer

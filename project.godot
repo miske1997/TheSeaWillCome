@@ -28,6 +28,7 @@ Players="*res://Scripts/Globals/Players.gd"
 LevelLoader="*res://Scripts/Globals/LevelLoader.gd"
 Saver="*res://Scripts/Globals/Saver.gd"
 Console="*res://addons/console/console.gd"
+DealDamage="*res://Scripts/Globals/DealDamage.gd"
 
 [display]
 
