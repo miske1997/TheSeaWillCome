@@ -1,4 +1,4 @@
 extends Node
 
-func deal_damage():
-	pass
+func deal_damage(damage: int, hit: Enemy):
+	hit.takeDamage(damage)

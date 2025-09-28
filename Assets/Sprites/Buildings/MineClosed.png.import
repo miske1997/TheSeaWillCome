@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq2pm784xo3rt"
-path="res://.godot/imported/WoodWall.png-98ac57d6aa8687aed64096796d9037f7.ctex"
+uid="uid://cr56t5xfhcrv"
+path="res://.godot/imported/MineClosed.png-a05c9366cd63f8f9af6b481b8a0491c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Buildings/WoodWall.png"
-dest_files=["res://.godot/imported/WoodWall.png-98ac57d6aa8687aed64096796d9037f7.ctex"]
+source_file="res://Assets/Sprites/Buildings/MineClosed.png"
+dest_files=["res://.godot/imported/MineClosed.png-a05c9366cd63f8f9af6b481b8a0491c7.ctex"]
 
 [params]
 

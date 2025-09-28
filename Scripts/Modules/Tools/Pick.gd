@@ -2,6 +2,7 @@ class_name Pick extends Tool
 
 @onready var timer: Timer = $Timer
 @onready var path_follow_2d: PathFollow2D = $Path2D/PathFollow2D
+
 var tilemap: TileMapLayer
 func _ready() -> void:
 	activate.connect(activate_tool)
@@ -56,7 +57,6 @@ func mine() -> void:
 		data.set_custom_data("ResourceAmount", amount)
 
 func mine_block():
-	#var tilemap: TileMapLayer = get_tree().get_first_node_in_group("TileMap")
 	var outlineTiles: TileMapLayer = tilemap.get_parent().get_node("Outlines")
 	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - tilemap.global_position)
 	tilemap.erase_cell(tileCoords) 

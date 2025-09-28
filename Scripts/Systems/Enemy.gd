@@ -9,3 +9,6 @@ func _ready() -> void:
 
 func takeDamage(damage: int):
 	health -= damage
+	if health <= 0:
+		await get_tree().create_timer(0.5).timeout
+		queue_free()

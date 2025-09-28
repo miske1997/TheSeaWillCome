@@ -15,7 +15,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position = lerp(position, subject.position  - get_viewport_rect().size / 2, 0.04) 
+	var newPos = subject.position  - get_viewport_rect().size / 2
+	if LevelLoader.levelStack.back().name == \"Surface\":
+		newPos -= Vector2(0, 50)
+	position = lerp(position, newPos, 0.04) 
+	
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1cf7"]

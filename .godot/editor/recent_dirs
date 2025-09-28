@@ -1,8 +1,9 @@
-res://Scripts/Globals
+res://Prefabs/Buildings
+res://Scripts/Components
 res://Prefabs/Enemies
+res://Scripts/Globals
 res://Assets/Sprites/Blocks
 res://Scenes/Components
-res://Prefabs/Buildings
 res://Scenes/UI
 res://Scenes
 res://Scenes/Levels
@@ -14,4 +15,3 @@ res://Prefabs/Env
 res://Assets/Sprites
 res://Prefabs/Player
 res://Scripts/Modules
-res://Scripts/Components

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnyyi8oyemb7x"]
+
+[ext_resource type="PackedScene" uid="uid://1t1njeicluw5" path="res://Prefabs/Enemies/enemy.tscn" id="1_omx2e"]
+[ext_resource type="Texture2D" uid="uid://dbasfa13y63mi" path="res://Assets/Sprites/Characters/Enemies/WalkingFish1.png" id="2_whe7t"]
+
+[node name="WalkingFish" instance=ExtResource("1_omx2e")]
+collision_mask = 132
+
+[node name="HurtBox" parent="." index="0"]
+position = Vector2(0.5, -4.75)
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(0, -8)
+texture = ExtResource("2_whe7t")
+
+[node name="HitBox" parent="Area2D" index="0"]
+position = Vector2(9, -4)

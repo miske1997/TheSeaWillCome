@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://2eoqhtng2krh"]
+
+[ext_resource type="PackedScene" uid="uid://13aef0hucu22" path="res://Prefabs/Tools/tool.tscn" id="1_iels2"]
+[ext_resource type="Script" uid="uid://ueid56452xov" path="res://Scripts/Modules/Tools/Sword.gd" id="2_45m45"]
+[ext_resource type="Texture2D" uid="uid://eunjgxrl4ida" path="res://Assets/Sprites/Tools/Sword.png" id="4_iels2"]
+[ext_resource type="Texture2D" uid="uid://ojvvrv5g4khg" path="res://Assets/Sprites/Tools/Axe.png" id="5_sq1hu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0klgy"]
+
+[sub_resource type="Curve2D" id="Curve2D_ys0i2"]
+bake_interval = 2.0
+_data = {
+"points": PackedVector2Array(-5.47954, 1.98854, 5.47954, -1.98854, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 2, 1)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51b6b"]
+size = Vector2(4.01714, 8.35113)
+
+[node name="Sword" instance=ExtResource("1_iels2")]
+script = ExtResource("2_45m45")
+attack_speed = 1.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_0klgy")
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="1"]
+position = Vector2(4, -5)
+target_position = Vector2(0, 15)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="." index="2"]
+
+[node name="Path2D" type="Path2D" parent="." index="3"]
+curve = SubResource("Curve2D_ys0i2")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" index="0"]
+rotation = -0.348123
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D" index="0"]
+position = Vector2(3.16118, 0.083387)
+texture = ExtResource("4_iels2")
+
+[node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D" index="1"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Area2D" index="0"]
+position = Vector2(5.82911, -2.74155)
+rotation = 0.820305
+shape = SubResource("RectangleShape2D_51b6b")
+
+[node name="Line2D" type="Line2D" parent="Path2D/PathFollow2D" index="2"]
+visible = false
+points = PackedVector2Array(0, 0, 4, -5, 7, -4, 4, -2)
+width = 2.0
+texture = ExtResource("5_sq1hu")
+
+[connection signal="timeout" from="Timer" to="." method="_on_swing_ended"]
+[connection signal="body_entered" from="Path2D/PathFollow2D/Area2D" to="." method="_on_area_2d_body_entered"]

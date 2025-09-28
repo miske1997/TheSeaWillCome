@@ -91,6 +91,9 @@ Interact={
 2d_physics/layer_3="Floor"
 2d_physics/layer_4="Triggers"
 2d_physics/layer_5="Trees"
+2d_physics/layer_6="Building"
+2d_physics/layer_7="ImuneBuilding"
+2d_physics/layer_8="Wall"
 
 [rendering]
 

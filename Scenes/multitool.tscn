@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d04un2ocoolw7"]
+[gd_scene load_steps=5 format=3 uid="uid://d04un2ocoolw7"]
 
 [ext_resource type="PackedScene" uid="uid://nj5421ptdtbl" path="res://Prefabs/Tools/pick.tscn" id="1_p0lur"]
 [ext_resource type="PackedScene" uid="uid://btt8faf07akqy" path="res://Prefabs/Tools/axe.tscn" id="2_8tdg8"]
+[ext_resource type="PackedScene" uid="uid://2eoqhtng2krh" path="res://Prefabs/Tools/sword.tscn" id="3_8tdg8"]
 
 [sub_resource type="GDScript" id="GDScript_p0lur"]
 resource_name = "Multitool"
@@ -23,6 +24,8 @@ func _process(delta: float) -> void:
 		show_tool($Pick)
 	elif collider.collision_layer == 16:
 		show_tool($Axe)
+	elif collider.collision_layer == 2:
+		show_tool($Sword)
 		
 
 func show_tool(tool):
@@ -43,7 +46,7 @@ func hide_tool():
 script = SubResource("GDScript_p0lur")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-collision_mask = 20
+collision_mask = 22
 collide_with_areas = true
 
 [node name="Pick" parent="." instance=ExtResource("1_p0lur")]
@@ -51,4 +54,7 @@ visible = false
 position = Vector2(4, -2)
 
 [node name="Axe" parent="." instance=ExtResource("2_8tdg8")]
+visible = false
+
+[node name="Sword" parent="." instance=ExtResource("3_8tdg8")]
 visible = false
