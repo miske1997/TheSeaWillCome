@@ -36,6 +36,8 @@ func deactivate_tool() -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	if not inUse:
+		return
 	if not body is Enemy:
 		return
 	if body in hit:

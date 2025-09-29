@@ -11,7 +11,6 @@ func _process(delta: float) -> void:
 	if not enabled:
 		return
 	look_at_target()
-	$RayCast2D.position = global_position
 	$RayCast2D.target_position = get_local_mouse_position().normalized() * 10
 	$RayCast2D.rotation = rotation
 	if Input.is_action_just_pressed("Click"):

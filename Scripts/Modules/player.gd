@@ -6,8 +6,13 @@ var wallJumpDuration := 0.3
 var wallJumpTimeout := 0.0
 @onready var wall_detect: RayCast2D = $WallDetect
 
+var look_dir = 1
+
 func _ready() -> void:
 	light_off()
+
+func _process(delta: float) -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	
@@ -25,17 +30,22 @@ func _physics_process(delta: float) -> void:
 		wallJumpTimeout -= delta
 		move_and_slide()
 		return
-		
+	
 	var direction := Input.get_axis("Left", "Right")
 	wall_detect.target_position.x = direction * 3.5
-	$AnimatedSprite2D.flip_h = direction < 0
-	if direction:
+	if direction != 0:
+		if look_dir != direction:
+			scale.x = -1
+			look_dir = direction
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	move_and_slide()
 	
+func take_damage(damage: int):
+	print("HIT ME")
+
 func light_on():
 	$Light.enabled = true
 	

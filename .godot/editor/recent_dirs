@@ -1,3 +1,5 @@
+res://Prefabs/Tools
+res://Prefabs/Workers
 res://Prefabs/Buildings
 res://Scripts/Components
 res://Prefabs/Enemies
@@ -8,7 +10,6 @@ res://Scenes/UI
 res://Scenes
 res://Scenes/Levels
 res://Assets/Tilemaps
-res://Prefabs/Tools
 res://Data
 res://Scripts/Modules/Tools
 res://Prefabs/Env

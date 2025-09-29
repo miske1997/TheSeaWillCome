@@ -1,10 +1,72 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnyyi8oyemb7x"]
+[gd_scene load_steps=4 format=3 uid="uid://bnyyi8oyemb7x"]
 
 [ext_resource type="PackedScene" uid="uid://1t1njeicluw5" path="res://Prefabs/Enemies/enemy.tscn" id="1_omx2e"]
 [ext_resource type="Texture2D" uid="uid://dbasfa13y63mi" path="res://Assets/Sprites/Characters/Enemies/WalkingFish1.png" id="2_whe7t"]
 
+[sub_resource type="GDScript" id="GDScript_omx2e"]
+resource_name = "WalkingFishAI"
+script/source = "extends Node
+
+@export var walkDir := 1
+@export var speed := 10.0
+@export var attackSpeed := 1.5
+@export var hitSpeed := 25.0
+
+@onready var mob: Enemy = get_parent()
+@onready var ray_cast_2d: RayCast2D = $\"../RayCast2D\"
+
+var attacking = false
+var onCD = false
+var startPos: Vector2
+
+func _ready() -> void:
+	$\"../Timer\".wait_time = attackSpeed
+
+func _physics_process(delta: float) -> void:
+	if not mob.is_on_floor():
+		mob.velocity += mob.get_gravity() * delta
+	
+	if onCD:
+		mob.velocity.x = 0
+		mob.move_and_slide()
+		return
+	
+	if attacking:
+		if (startPos - mob.position).length() >= $\"../RayCast2D\".target_position.length() * 0.8:
+			end_attack()
+		mob.move_and_slide()
+		return
+	
+	if ray_cast_2d.get_collider():
+		attack()
+		return
+	
+	mob.velocity.x = walkDir * speed
+	mob.move_and_slide()
+
+func attack():
+	attacking = true
+	mob.velocity.x = walkDir * hitSpeed
+	startPos = mob.position
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if not attacking or onCD:
+		return
+	mob.velocity.x = -walkDir * hitSpeed
+	DealDamage.damage_friend(1, body)
+	await get_tree().create_timer(0.1).timeout
+	end_attack()
+
+func end_attack():
+	onCD = true
+	$\"../Timer\".start()
+
+func _on_timer_timeout() -> void:
+	onCD = false
+	attacking = false
+"
+
 [node name="WalkingFish" instance=ExtResource("1_omx2e")]
-collision_mask = 132
 
 [node name="HurtBox" parent="." index="0"]
 position = Vector2(0.5, -4.75)
@@ -13,5 +75,20 @@ position = Vector2(0.5, -4.75)
 position = Vector2(0, -8)
 texture = ExtResource("2_whe7t")
 
+[node name="AI" parent="." index="2"]
+script = SubResource("GDScript_omx2e")
+
 [node name="HitBox" parent="Area2D" index="0"]
 position = Vector2(9, -4)
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="5"]
+position = Vector2(0, -3)
+target_position = Vector2(20, 0)
+collision_mask = 129
+collide_with_areas = true
+
+[node name="Timer" type="Timer" parent="." index="6"]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="AI" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="AI" method="_on_timer_timeout"]

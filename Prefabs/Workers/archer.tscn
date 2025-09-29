@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://nvi10awnb1hg"]
+
+[ext_resource type="PackedScene" uid="uid://b3c8cttuvo2nk" path="res://Prefabs/Workers/worker.tscn" id="1_muygn"]
+[ext_resource type="PackedScene" uid="uid://qarh2vtapnoq" path="res://Prefabs/Tools/bow.tscn" id="2_72fqx"]
+[ext_resource type="Texture2D" uid="uid://dk6bfhr7gaax4" path="res://Assets/Sprites/Characters/WorkerSide.png" id="3_3ec1t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72fqx"]
+size = Vector2(6, 8)
+
+[sub_resource type="GDScript" id="GDScript_72fqx"]
+resource_name = "ArcherAI"
+script/source = "extends Node
+
+@onready var bow: Bow = $\"../Bow\"
+
+func _ready() -> void:
+	bow.enabled = true
+
+func _process(delta: float) -> void:
+	if not get_tree().get_first_node_in_group(\"Player\"):
+		return
+	bow.targetLocation = get_tree().get_first_node_in_group(\"Player\").position
+"
+
+[node name="Archer" instance=ExtResource("1_muygn")]
+collision_mask = 4
+
+[node name="Bow" parent="." index="0" instance=ExtResource("2_72fqx")]
+position = Vector2(0, -3)
+scale = Vector2(0.583905, 0.583905)
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(0, -4)
+texture = ExtResource("3_3ec1t")
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_72fqx")
+
+[node name="AI" parent="." index="3"]
+script = SubResource("GDScript_72fqx")

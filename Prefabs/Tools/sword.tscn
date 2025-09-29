@@ -32,6 +32,7 @@ hit_from_inside = true
 collide_with_areas = true
 
 [node name="Timer" type="Timer" parent="." index="2"]
+one_shot = true
 
 [node name="Path2D" type="Path2D" parent="." index="3"]
 curve = SubResource("Curve2D_ys0i2")
