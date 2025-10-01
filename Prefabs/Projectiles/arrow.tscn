@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c21holmoobxrf"]
+
+[ext_resource type="Script" uid="uid://b2yb1jl7jya2" path="res://Scripts/Systems/Projectile.gd" id="1_a4uvm"]
+[ext_resource type="Texture2D" uid="uid://rlud5xb40r8x" path="res://Assets/Sprites/Blocks/LapisOre.png" id="2_3deo0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4uvm"]
+radius = 1.0
+
+[node name="Arrow" type="RigidBody2D"]
+collision_layer = 256
+collision_mask = 4
+lock_rotation = true
+script = ExtResource("1_a4uvm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1875, 0.1875)
+texture = ExtResource("2_3deo0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a4uvm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

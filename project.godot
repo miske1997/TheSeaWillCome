@@ -94,6 +94,7 @@ Interact={
 2d_physics/layer_6="Building"
 2d_physics/layer_7="ImuneBuilding"
 2d_physics/layer_8="Wall"
+2d_physics/layer_9="Projectiles"
 
 [rendering]
 

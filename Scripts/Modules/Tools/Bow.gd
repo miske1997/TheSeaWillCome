@@ -1,7 +1,7 @@
 class_name Bow extends Tool
 
 @export var attack_speed := 1.0
-
+@export var arrow: PackedScene
 @onready var timer: Timer = $Timer
 
 var targetLocation: Vector2
@@ -24,8 +24,13 @@ func look_at_target():
 		look_at(targetLocation)
 
 func activate_tool() -> void:
-	inUse = true
-	timer.start()
+	var projectile = arrow.instantiate()
+	projectile.direction = Vector2.from_angle(rotation)
+	projectile.speed = 300.0
+	get_tree().root.add_child(projectile)
+	projectile.position = global_position + projectile.direction * 10
+	#inUse = true
+	#timer.start()
 
 func deactivate_tool() -> void:
 	inUse = false

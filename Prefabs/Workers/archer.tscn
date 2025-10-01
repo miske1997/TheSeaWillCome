@@ -19,7 +19,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not get_tree().get_first_node_in_group(\"Player\"):
 		return
-	bow.targetLocation = get_tree().get_first_node_in_group(\"Player\").position
+	#bow.targetLocation = get_tree().get_first_node_in_group(\"Player\").position
+
+
+func _on_timer_timeout() -> void:
+	var initVelocity = 300
+	var gravity : int = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+	var xt = get_tree().get_first_node_in_group(\"Player\").position.x - bow.global_position.x
+	var yt = get_tree().get_first_node_in_group(\"Player\").position.y - bow.global_position.y
+	var angle = atan((pow(initVelocity, 2) - sqrt(pow(initVelocity, 4)  - gravity * (gravity * pow(xt, 2) + (2 * yt * pow(initVelocity, 2))))) / (gravity * xt))
+	bow.rotation = -angle
+	bow.activate_tool()
 "
 
 [node name="Archer" instance=ExtResource("1_muygn")]
@@ -27,6 +37,7 @@ collision_mask = 4
 
 [node name="Bow" parent="." index="0" instance=ExtResource("2_72fqx")]
 position = Vector2(0, -3)
+rotation = -0.174533
 scale = Vector2(0.583905, 0.583905)
 
 [node name="Sprite2D" parent="." index="1"]
@@ -39,3 +50,9 @@ shape = SubResource("RectangleShape2D_72fqx")
 
 [node name="AI" parent="." index="3"]
 script = SubResource("GDScript_72fqx")
+
+[node name="Timer" type="Timer" parent="AI" index="0"]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="AI/Timer" to="AI" method="_on_timer_timeout"]
