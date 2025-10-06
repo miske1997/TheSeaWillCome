@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ctl3jouoc5mim" path="res://Prefabs/Env/tree.tscn" id="6_imwft"]
 [ext_resource type="PackedScene" uid="uid://x4la8f4gtf8x" path="res://Prefabs/Buildings/ruin.tscn" id="7_hjipb"]
 [ext_resource type="PackedScene" uid="uid://dp6g5cw8347wn" path="res://Prefabs/Buildings/wall_1.tscn" id="7_wo82p"]
-[ext_resource type="PackedScene" uid="uid://bnyyi8oyemb7x" path="res://Prefabs/Enemies/walking_fish.tscn" id="8_lxwo3"]
+[ext_resource type="Script" uid="uid://cpwpsqstxwjj1" path="res://Scripts/Modules/EnemySpawner.gd" id="8_wo82p"]
 
 [sub_resource type="GDScript" id="GDScript_cphue"]
 resource_name = "Surface"
@@ -102,6 +102,10 @@ nextLevel = "cave_level_1"
 
 [node name="Ruin" parent="Lighting" instance=ExtResource("7_hjipb")]
 position = Vector2(137, 32)
+buildingName = "Farm"
+
+[node name="Ruin4" parent="Lighting" instance=ExtResource("7_hjipb")]
+position = Vector2(254, 32)
 buildingName = "wood_cuters_1"
 
 [node name="Ruin2" parent="Lighting" instance=ExtResource("7_hjipb")]
@@ -109,7 +113,7 @@ position = Vector2(167, 32)
 
 [node name="Ruin3" parent="Lighting" instance=ExtResource("7_hjipb")]
 position = Vector2(212, 32)
-buildingName = "wall_1"
+buildingName = "TraningGround"
 
 [node name="Trees" type="Node2D" parent="Lighting"]
 
@@ -120,14 +124,19 @@ position = Vector2(92, 18)
 energy = 2.5
 script = SubResource("GDScript_yvs8g")
 
-[node name="Archer" parent="." instance=ExtResource("6_7gti3")]
-position = Vector2(108, 31)
-
 [node name="PlayerSpawn" type="Node2D" parent="."]
 position = Vector2(56, 17)
 
 [node name="Wall1" parent="." instance=ExtResource("7_wo82p")]
 position = Vector2(43, 32)
 
-[node name="WalkingFish" parent="." instance=ExtResource("8_lxwo3")]
-position = Vector2(-20, 32)
+[node name="Archer" parent="." instance=ExtResource("6_7gti3")]
+position = Vector2(112, 31)
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("8_wo82p")
+spawnOffset = null
+
+[node name="Left" type="Node" parent="EnemySpawner"]
+
+[node name="Right" type="Node" parent="EnemySpawner"]

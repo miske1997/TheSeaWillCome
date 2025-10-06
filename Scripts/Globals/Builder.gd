@@ -8,6 +8,12 @@ func build_prefab(prefabName: String) -> Node2D:
 	var prefab = load(prefabAdresses[prefabName]).instantiate()
 	return prefab
 
+func makeEnemy(enemyName: String) -> Node2D:
+	var enemy := build_prefab(enemyName)
+	return enemy
+
 func makeBuilding(buildingName: String, materials: Resources) -> Node2D:
 	Utils.payResources(materials)
-	return build_prefab(buildingName)
+	var building := build_prefab(buildingName)
+	Events.buildingBuilt.emit(building)
+	return building

@@ -1,14 +1,14 @@
+Node
+PanelContainer
+TextureRect
 Timer
 CollisionShape2D
 RigidBody2D
 StaticBody2D
 Sprite2D
-Node
 CharacterBody2D
 RayCast2D
 Area2D
 Node2D
 DirectionalLight2D
 ColorRect
-PointLight2D
-PanelContainer

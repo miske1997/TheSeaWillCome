@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://6duurypjwr8i"]
+
+[ext_resource type="PackedScene" uid="uid://dvhjs6euc5s12" path="res://Scenes/UI/resource_requierment.tscn" id="1_nx2vf"]
+[ext_resource type="Texture2D" uid="uid://dofmpk3vna0vt" path="res://Assets/Sprites/Characters/WorkerFront.png" id="2_ejesg"]
+[ext_resource type="Texture2D" uid="uid://duskutlxxvgbh" path="res://Assets/Sprites/Icons/Workers.png" id="3_i0h53"]
+[ext_resource type="Texture2D" uid="uid://dl8jnfootr6nu" path="res://Assets/Sprites/Icons/Wood.png" id="4_08t7l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_civwn"]
+bg_color = Color(0.140447, 0.140447, 0.140447, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="GDScript" id="GDScript_i0h53"]
+resource_name = "TraingGroundUI"
+script/source = "extends PanelContainer
+
+
+func _ready() -> void:
+	size = Vector2(46.0, 90.0)
+	scale = Vector2.ONE * 0.38
+	position -= Vector2((size.x * scale.x) / 2.0, size.y * scale.y)
+"
+
+[node name="TraningGroundUI" type="PanelContainer"]
+offset_right = 46.0
+offset_bottom = 90.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_civwn")
+script = SubResource("GDScript_i0h53")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_ejesg")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="ResourceDisplay" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResourceRequierment" parent="VBoxContainer/ResourceDisplay" instance=ExtResource("1_nx2vf")]
+layout_mode = 2
+
+[node name="TextureRect" parent="VBoxContainer/ResourceDisplay/ResourceRequierment" index="0"]
+texture = ExtResource("3_i0h53")
+
+[node name="Label" parent="VBoxContainer/ResourceDisplay/ResourceRequierment" index="1"]
+text = "1"
+
+[node name="ResourceRequierment2" parent="VBoxContainer/ResourceDisplay" instance=ExtResource("1_nx2vf")]
+layout_mode = 2
+
+[node name="TextureRect" parent="VBoxContainer/ResourceDisplay/ResourceRequierment2" index="0"]
+texture = ExtResource("4_08t7l")
+
+[node name="Label" parent="VBoxContainer/ResourceDisplay/ResourceRequierment2" index="1"]
+text = "1"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "PRESS E TO BUY"
+
+[editable path="VBoxContainer/ResourceDisplay/ResourceRequierment"]
+[editable path="VBoxContainer/ResourceDisplay/ResourceRequierment2"]

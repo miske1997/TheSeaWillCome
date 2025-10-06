@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvg8k4tld4dca"]
+
+[ext_resource type="PackedScene" uid="uid://lqgkh1tx2s3o" path="res://Prefabs/Buildings/ProductionBuilding.tscn" id="1_uygho"]
+[ext_resource type="Texture2D" uid="uid://cw1y1gex2w0cv" path="res://Assets/Sprites/Buildings/TrainingGround1.png" id="2_odcvo"]
+[ext_resource type="PackedScene" uid="uid://daxwc4f85i8q4" path="res://Scenes/Components/interactible.tscn" id="3_2rgxf"]
+[ext_resource type="PackedScene" uid="uid://6duurypjwr8i" path="res://Scenes/UI/traning_ground_ui.tscn" id="6_eobom"]
+
+[sub_resource type="GDScript" id="GDScript_2rgxf"]
+resource_name = "TraningGround"
+script/source = "extends Node2D
+
+
+func _on_interact_interacted() -> void:
+	if GameData.castleResources[\"Workers\"].amount == 0 or GameData.castleResources[\"Wood\"].amount == 0:
+		return
+	GameData.decrement_resource_amount(\"Workers\", 1)
+	GameData.decrement_resource_amount(\"Wood\", 1)
+"
+
+[node name="TraningGround" instance=ExtResource("1_uygho")]
+script = SubResource("GDScript_2rgxf")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -16)
+texture = ExtResource("2_odcvo")
+
+[node name="Interact" parent="." index="1" instance=ExtResource("3_2rgxf")]
+
+[node name="UI" parent="Interact" index="0" instance=ExtResource("6_eobom")]
+visible = false
+offset_top = -13.0
+offset_bottom = 77.0
+
+[connection signal="interacted" from="Interact" to="." method="_on_interact_interacted"]

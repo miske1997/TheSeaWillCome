@@ -13,6 +13,9 @@ func increment_time() -> void:
 	if GameData.gameTime > gameTotalTime / 2.0 and not GameData.nightTime:
 		Events.nightFall.emit()
 	GameData.nightTime = GameData.gameTime > gameTotalTime / 2.0
-	GameData.gameTime %= gameTotalTime
+	if GameData.gameTime >= gameTotalTime:
+		GameData.gameTime = 0
+		GameData.day += 1
+		Events.dayBreak.emit()
 	
 	

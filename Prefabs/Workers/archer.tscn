@@ -29,7 +29,7 @@ func _on_timer_timeout() -> void:
 	var yt = get_tree().get_first_node_in_group(\"Player\").position.y - bow.global_position.y
 	var angle = atan((pow(initVelocity, 2) - sqrt(pow(initVelocity, 4)  - gravity * (gravity * pow(xt, 2) + (2 * yt * pow(initVelocity, 2))))) / (gravity * xt))
 	bow.rotation = -angle
-	bow.activate_tool()
+	#bow.activate_tool()
 "
 
 [node name="Archer" instance=ExtResource("1_muygn")]

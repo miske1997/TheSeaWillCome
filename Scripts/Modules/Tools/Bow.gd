@@ -14,16 +14,17 @@ func _process(delta: float) -> void:
 	if not enabled:
 		return
 	look_at_target()
-	if Input.is_action_just_pressed("Click"):
-		activate_tool()
-	if Input.is_action_just_released("Click"):
-		deactivate_tool()
+	#if Input.is_action_just_pressed("Click"):
+		#activate_tool()
+	#if Input.is_action_just_released("Click"):
+		#deactivate_tool()
 
 func look_at_target():
 	if targetLocation:
 		look_at(targetLocation)
 
 func activate_tool() -> void:
+	print("ARROW")
 	var projectile = arrow.instantiate()
 	projectile.direction = Vector2.from_angle(rotation)
 	projectile.speed = 300.0

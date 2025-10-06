@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckmvr6oydyix6"]
+[gd_scene load_steps=6 format=3 uid="uid://ckmvr6oydyix6"]
 
 [ext_resource type="PackedScene" uid="uid://bmneelatg3e5k" path="res://Scenes/UI/pause_menu.tscn" id="1_1riqc"]
 [ext_resource type="Script" uid="uid://ss441ck4coq8" path="res://Scripts/Systems/DayNightCycle.gd" id="2_rql2t"]
 [ext_resource type="PackedScene" uid="uid://bkqt85ww3j77d" path="res://Scenes/camera.tscn" id="3_28a5q"]
 [ext_resource type="PackedScene" uid="uid://eyb8bumt5at6" path="res://Prefabs/Player/player.tscn" id="4_3k22y"]
+[ext_resource type="Script" uid="uid://bwa842ntc1uq6" path="res://Scripts/Systems/GameManager.gd" id="5_yn00p"]
 
 [node name="GlobalScene" type="Node2D"]
 
@@ -33,5 +34,8 @@ SPEED = 80.0
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("subject") instance=ExtResource("3_28a5q")]
 subject = NodePath("../Player")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("5_yn00p")
 
 [connection signal="timeout" from="DayNightCycle/Timer" to="DayNightCycle" method="increment_time"]
