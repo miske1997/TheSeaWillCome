@@ -31,7 +31,7 @@ func look_at_target():
 func mine() -> void:
 	if not inUse:
 		return
-	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - tilemap.global_position)
+	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - $RayCast2D.get_collision_normal() - tilemap.global_position)
 	if not tilemap.get_cell_tile_data(tileCoords):
 		return
 	var data := tilemap.get_cell_tile_data(tileCoords)
@@ -58,7 +58,7 @@ func mine() -> void:
 
 func mine_block():
 	var outlineTiles: TileMapLayer = tilemap.get_parent().get_node("Outlines")
-	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - tilemap.global_position)
+	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - $RayCast2D.get_collision_normal() - tilemap.global_position)
 	tilemap.erase_cell(tileCoords) 
 	outlineTiles.erase_cell(tileCoords)
 
@@ -66,7 +66,7 @@ func activate_tool() -> void:
 	if not $RayCast2D.get_collider():
 		return
 	tilemap = $RayCast2D.get_collider()
-	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - tilemap.global_position)
+	var tileCoords := tilemap.local_to_map($RayCast2D.get_collision_point() - $RayCast2D.get_collision_normal() - tilemap.global_position)
 	if not tilemap.get_cell_tile_data(tileCoords):
 		return
 	var data := tilemap.get_cell_tile_data(tileCoords)

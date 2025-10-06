@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://pvg1lvftbxnj"]
+[gd_scene load_steps=13 format=4 uid="uid://pvg1lvftbxnj"]
 
 [ext_resource type="Texture2D" uid="uid://bp8kb72bixsgn" path="res://Assets/Sprites/BG/Background.png" id="1_yvs8g"]
 [ext_resource type="TileSet" uid="uid://qqtgrsrtixc7" path="res://Assets/Tilemaps/Planes.tres" id="2_wo82p"]
 [ext_resource type="PackedScene" uid="uid://btg0mnufcdcba" path="res://Prefabs/Buildings/lift.tscn" id="3_lxwo3"]
+[ext_resource type="PackedScene" uid="uid://nvi10awnb1hg" path="res://Prefabs/Workers/archer.tscn" id="6_7gti3"]
 [ext_resource type="PackedScene" uid="uid://ctl3jouoc5mim" path="res://Prefabs/Env/tree.tscn" id="6_imwft"]
 [ext_resource type="PackedScene" uid="uid://x4la8f4gtf8x" path="res://Prefabs/Buildings/ruin.tscn" id="7_hjipb"]
 [ext_resource type="PackedScene" uid="uid://dp6g5cw8347wn" path="res://Prefabs/Buildings/wall_1.tscn" id="7_wo82p"]
@@ -51,18 +52,6 @@ func _process(delta: float) -> void:
 [sub_resource type="GDScript" id="GDScript_wo82p"]
 resource_name = "LeftSpawner"
 script/source = "extends Node
-
-
-
-func start_spawning(spawnCash: int):
-	spawn_enemy()
-	
-
-func spawn_enemy():
-	var position: Vector2 = get_parent().get_left_spawn_position()
-	var enemy = Builder.makeEnemy(\"walking_fish\")
-	enemy.position = position
-	get_tree().get_first_node_in_group(\"EnemiesFolder\").add_child(enemy)
 "
 
 [node name="Surface" type="Node2D"]
@@ -136,8 +125,6 @@ buildingName = "TraningGround"
 [node name="Tree" parent="Lighting/Trees" instance=ExtResource("6_imwft")]
 position = Vector2(92, 18)
 
-[node name="Enemies" type="Node2D" parent="Lighting" groups=["EnemiesFolder"]]
-
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.737842, 0.62139, 0.467602, 1)
 energy = 2.5
@@ -148,6 +135,9 @@ position = Vector2(56, 17)
 
 [node name="Wall1" parent="." instance=ExtResource("7_wo82p")]
 position = Vector2(43, 32)
+
+[node name="Archer" parent="." instance=ExtResource("6_7gti3")]
+position = Vector2(112, 31)
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("8_wo82p")
