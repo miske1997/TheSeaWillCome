@@ -12,4 +12,6 @@ res://Scenes/Components/building_upgrade.tscn
 res://Prefabs/Workers/archer.tscn
 res://Prefabs/Buildings/ruin.tscn
 res://Scripts/Modules/EnemySpawner.gd
-res://Scripts/Modules/Tools/Pick.gd
+res://Prefabs/Enemies/walking_fish.tscn
+res://Scripts/Systems/Projectile.gd
+res://Prefabs/Projectiles/arrow.tscn

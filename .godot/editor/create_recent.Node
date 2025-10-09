@@ -1,7 +1,8 @@
+NinePatchRect
+TextureRect
 Node2D
 Node
 PanelContainer
-TextureRect
 Timer
 CollisionShape2D
 RigidBody2D

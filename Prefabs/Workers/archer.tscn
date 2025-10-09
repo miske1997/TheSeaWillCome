@@ -11,7 +11,10 @@ size = Vector2(6, 8)
 resource_name = "ArcherAI"
 script/source = "extends Node
 
+@export var range := 200.0
+
 @onready var bow: Bow = $\"../Bow\"
+var target: Node2D
 
 func _ready() -> void:
 	bow.enabled = true
@@ -20,16 +23,27 @@ func _process(delta: float) -> void:
 	if not get_tree().get_first_node_in_group(\"Player\"):
 		return
 	#bow.targetLocation = get_tree().get_first_node_in_group(\"Player\").position
-
+	target = null
+	for enemy: Node2D in get_tree().get_nodes_in_group(\"Enemy\"):
+		if (enemy.position - get_parent().position).length() < range:
+			target = enemy
+			break
 
 func _on_timer_timeout() -> void:
+	if not target:
+		return
+	
 	var initVelocity = 300
 	var gravity : int = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
-	var xt = get_tree().get_first_node_in_group(\"Player\").position.x - bow.global_position.x
-	var yt = get_tree().get_first_node_in_group(\"Player\").position.y - bow.global_position.y
-	var angle = atan((pow(initVelocity, 2) - sqrt(pow(initVelocity, 4)  - gravity * (gravity * pow(xt, 2) + (2 * yt * pow(initVelocity, 2))))) / (gravity * xt))
-	bow.rotation = -angle
-	#bow.activate_tool()
+	var sign = sign(target.position.x - bow.global_position.x)
+	var xt = abs(target.position.x - bow.global_position.x)
+	var yt = abs(target.position.y - bow.global_position.y)
+	var angle = atan((pow(initVelocity, 2) + sqrt(pow(initVelocity, 4)  - gravity * (gravity * pow(xt, 2) + (2 * yt * pow(initVelocity, 2))))) / (gravity * xt))
+	if sign > 0:
+		bow.rotation = -angle
+	else:
+		bow.rotation = PI + angle
+	bow.activate_tool()
 "
 
 [node name="Archer" instance=ExtResource("1_muygn")]
